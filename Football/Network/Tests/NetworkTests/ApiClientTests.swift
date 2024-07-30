@@ -18,7 +18,7 @@ final class ApiClientTests: XCTestCase {
 
     @MainActor 
     private func setMockProtocol(statusCode: Int = 200) {
-        MockURLProtocol.requestHandler = { request in
+        TestURLProtocol.requestHandler = { request in
             let expectedResponseData =
             """
             {"id": 1, "title": "Hello, world!"}
@@ -29,16 +29,19 @@ final class ApiClientTests: XCTestCase {
         }
     }
     
-    func testAsyncFetchRequestAtRouteSucceedsIfServiceReturnsValidData() async throws {
+    private var testURLSession: URLSession {
         let sessionConfiguration = URLSessionConfiguration.ephemeral
-        sessionConfiguration.protocolClasses = [MockURLProtocol.self]
-        let session = URLSession(configuration: sessionConfiguration)
+        sessionConfiguration.protocolClasses = [TestURLProtocol.self]
+        return URLSession(configuration: sessionConfiguration)
+    }
+    
+    func testAsyncFetchRequestAtRouteSucceedsIfServiceReturnsValidData() async throws {
         await setMockProtocol()
         
         let route = MockApiRoute()
 
         do {
-            let result: TestModel = try await client().asyncFetchRequest(route, in: env, session: session)
+            let result: TestModel = try await client().asyncFetchRequest(route, in: env, session: testURLSession)
             XCTAssertEqual(result.id, 1)
             XCTAssertEqual(result.title, "Hello, world!")
         } catch {
@@ -47,15 +50,12 @@ final class ApiClientTests: XCTestCase {
     }
     
     func testAsyncFetchRequestAtRouteFailsForInvalidResponse() async throws {
-        let sessionConfiguration = URLSessionConfiguration.ephemeral
-        sessionConfiguration.protocolClasses = [MockURLProtocol.self]
-        let session = URLSession(configuration: sessionConfiguration)
         await setMockProtocol(statusCode: 100)
         
         let route = MockApiRoute()
 
         do {
-            let result: TestModel = try await client().asyncFetchRequest(route, in: env, session: session)
+            let result: TestModel = try await client().asyncFetchRequest(route, in: env, session: testURLSession)
             XCTAssertEqual(result.id, 1)
             XCTAssertEqual(result.title, "Hello, world!")
         } catch {
@@ -74,13 +74,11 @@ final class ApiClientTests: XCTestCase {
     }
     
     func testFetchingItemAtRouteFailsForInvalidData() async throws {
-        let sessionConfiguration = URLSessionConfiguration.ephemeral
-        sessionConfiguration.protocolClasses = [MockURLProtocol.self]
-        let session = URLSession(configuration: sessionConfiguration)
+
         await setMockProtocol()
         
         do {
-            let _: String? = try await client().asyncFetchRequest(route, in: env, session: session)
+            let _: String? = try await client().asyncFetchRequest(route, in: env, session: testURLSession)
             XCTFail("Should fail")
         } catch {
             let error = error as? APIError

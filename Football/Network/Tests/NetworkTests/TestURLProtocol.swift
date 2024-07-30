@@ -2,21 +2,21 @@ import Foundation
 import XCTest
 
 
-final class MockURLProtocol: URLProtocol {
+final class TestURLProtocol: URLProtocol {
     @MainActor
     static var requestHandler: ((URLRequest) throws -> (HTTPURLResponse, Data))?
     
     override class func canInit(with request: URLRequest) -> Bool {
-        return true
+        true
     }
     
     override class func canonicalRequest(for request: URLRequest) -> URLRequest {
-        return request
+        request
     }
     
     @MainActor
     override func startLoading() {
-        guard let handler = MockURLProtocol.requestHandler else {
+        guard let handler = TestURLProtocol.requestHandler else {
             XCTFail("Received unexpected request with no handler set")
             return
         }
