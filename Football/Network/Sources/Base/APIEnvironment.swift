@@ -20,15 +20,14 @@ public protocol APIEnvironment: APIRequestData {
     var scheme: String { get }
     var baseURL: String { get }
     var apiVersion: String { get }
+    var domain: String { get }
 }
 
 extension APIEnvironment {
     
     // Default  Values
-    
     public var scheme: String { "https" }
-    
     public var baseURL: String { "" }
-    
     public var apiVersion: String { "" }
+    public var domain: String { "" }
 }

@@ -1,21 +1,25 @@
 //
-//  LeaguesView.swift
+//  SquadView.swift
 //  FootballApp
 //
 
 import SwiftUI
 import Network
 
-struct LeaguesView: View {
-    @State private var model = LeaguesViewModel()
+struct SquadView: View {
+    @State private var model: SquadViewModel
     
     @EnvironmentObject private var router: ViewRouter
     @EnvironmentObject private var tabCoordinator: AppTabRouter
     @EnvironmentObject private var modalRouter: ModalScreenRouter
-
+    
+    init(teamID: Int) {
+        model = SquadViewModel(teamID: teamID)
+    }
+    
     var body: some View {
         baseView()
-            .navigationBar(title: "Leagues")
+            .navigationBar(title: "Team Squad")
             .refreshable {
                 Task {
                     await model.refresh()
@@ -30,7 +34,7 @@ struct LeaguesView: View {
             Label("No Data", systemImage: "newspaper")
         case .finished:
             ScrollView {
-                leaguesGrid
+                squadGrid
             }
         case .loading:
             ProgressView("Loading")
@@ -50,7 +54,7 @@ struct LeaguesView: View {
             ProgressView()
                 .onAppear {
                     Task {
-                        await model.fetchAllLeagues()
+                        await model.fetchTeamSquad()
                     }
                 }
         }
@@ -59,15 +63,15 @@ struct LeaguesView: View {
 
 // MARK: - Subviews
 
-private extension LeaguesView {
+private extension SquadView {
     
-    var leaguesGrid: some View {
+    var squadGrid: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
-            ForEach(model.allLeagues, id: \.id) { league in
-                Button {
-//                    router.push(league)
+            ForEach(model.teamSquad, id: \.id) { player in
+                SwiftUI.Button {
+                    
                 } label: {
-                    LeagueGridItem(item: league)
+                    SquadGridItem(item: player)
                 }
             }
             
@@ -75,7 +79,7 @@ private extension LeaguesView {
                 .fill(.clear)
                 .frame(height: 20) // Bottom padding
                 .task {
-                    if model.state != .loading, !model.allLeagues.isEmpty {
+                    if model.state != .loading, !model.teamSquad.isEmpty {
                         await model.loadMoreContent()
                     }
                 }
@@ -86,6 +90,6 @@ private extension LeaguesView {
 
 #Preview {
     NavigationStack {
-        LeaguesView()
+        TeamsView()
     }
 }

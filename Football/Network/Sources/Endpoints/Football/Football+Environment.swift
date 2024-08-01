@@ -1,8 +1,8 @@
 
 public extension Football {
-
+    
     enum Environment: APIEnvironment {
-
+        
         case production
         case preproduction
         case develop(apiToken: String)
@@ -30,5 +30,19 @@ public extension Football.Environment {
         }
     }
     
-    var apiVersion: String { "/v3/football" }
+    var queryParams: [String : String]? {
+//        switch self {
+//        case .production: return nil
+//        case .preproduction: return nil
+//        case .develop(let apiToken):
+//            return [
+//                "api_token": "\(apiToken)"
+//            ]
+//        }
+        return nil
+    }
+    
+    var apiVersion: String { "/v3" }
+    
+    var domain: String { "/football" }
 }

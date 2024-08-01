@@ -22,13 +22,9 @@ public struct AsyncButton<Label: View>: View {
                     ProgressView()
                 } else {
                     label()
-                        .font(.headline)
                 }
             }
-            .padding(.vertical, 8)
-            .frame(maxWidth: .infinity)
         }
-        .buttonStyle(.borderedProminent)
         .disabled(isRunning)
     }
 }

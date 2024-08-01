@@ -7,9 +7,8 @@ public protocol LeaguesServiceable {
     func getLeagueByID<T: Decodable>(_ id: Int) async throws -> T
     func getLeaguesLive<T: Decodable>() async throws -> T
     func getLeagueByFixtureDate<T: Decodable>(date: String) async throws -> T
-    func getLeagueByCountryID<T: Decodable>(_ countryID: Int) async throws -> T
-    func leagueSearch<T: Decodable>(query: String) async throws -> T
-    
+    func getLeaguesByCountryID<T: Decodable>(_ countryID: Int) async throws -> T
+    func getLeagueSearch<T: Decodable>(by query: String) async throws -> T
 }
 
 public struct LeaguesService: APIClient, LeaguesServiceable {
@@ -47,15 +46,14 @@ public struct LeaguesService: APIClient, LeaguesServiceable {
         try await asyncFetchRequest(Football.Leagues.leagueByFixtureDate(date: date), in: environment)
     }
     
-    public func getLeagueByCountryID<T: Decodable>(_ countryID: Int) async throws -> T {
+    public func getLeaguesByCountryID<T: Decodable>(_ countryID: Int) async throws -> T {
         try await asyncFetchRequest(Football.Leagues.leagueByCountryID(countryID), in: environment)
     }
     
-    public func leagueSearch<T: Decodable>(query: String) async throws -> T {
+    public func getLeagueSearch<T: Decodable>(by query: String) async throws -> T {
         try await asyncFetchRequest(Football.Leagues.leaguesSearch(query: query), in: environment)
     }
 }
-
 
 public final class LeaguesServiceMock: Mockable, LeaguesServiceable {
     
@@ -77,11 +75,11 @@ public final class LeaguesServiceMock: Mockable, LeaguesServiceable {
         loadJSON(filename: "top_rated_response", type: T.self)
     }
     
-    public func getLeagueByCountryID<T: Decodable>(_ countryID: Int) async throws -> T {
+    public func getLeaguesByCountryID<T: Decodable>(_ countryID: Int) async throws -> T {
         loadJSON(filename: "top_rated_response", type: T.self)
     }
     
-    public func leagueSearch<T: Decodable>(query: String) async throws -> T {
+    public func getLeagueSearch<T: Decodable>(by query: String) async throws -> T {
         loadJSON(filename: "top_rated_response", type: T.self)
     }
 }

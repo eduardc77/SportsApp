@@ -1,8 +1,8 @@
 import Foundation
 import XCTest
 
-
 final class TestURLProtocol: URLProtocol {
+    
     @MainActor
     static var requestHandler: ((URLRequest) throws -> (HTTPURLResponse, Data))?
     

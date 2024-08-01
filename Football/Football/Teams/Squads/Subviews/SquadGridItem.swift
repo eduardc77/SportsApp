@@ -1,19 +1,14 @@
 //
-//  LeagueGridItem.swift
+//  TeamSquadGridItem.swift
 //  FootballApp
 //
 
 import SwiftUI
 import Network
 
-struct LeagueGridItem: View {
-    let item: League
-    @State var isEmpty = false
-    
-    init(item: League) {
-        self.item = item
-    }
-    
+struct SquadGridItem: View {
+    let item: Player
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             if let imageURL = URL(string: item.imagePath ?? "") {
@@ -21,7 +16,12 @@ struct LeagueGridItem: View {
                     .frame(maxWidth: .infinity, maxHeight: 120)
                     .padding(.vertical)
             } else {
-                Color.secondary.frame(height: 120)
+                ZStack {
+                    Color.secondary.frame(height: 120)
+                    Image(systemName: "figure.soccer")
+                        .foregroundStyle(.white)
+                        .font(.largeTitle)
+                }
             }
             
             VStack(alignment: .leading, spacing: .xxxSmall) {
@@ -32,7 +32,7 @@ struct LeagueGridItem: View {
                     .foregroundStyle(.primary)
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                Text(item.type ?? "")
+                Text(item.start ?? "")
                     .lineLimit(5)
                     .font(.callout.weight(.semibold))
                     .multilineTextAlignment(.leading)
@@ -42,7 +42,7 @@ struct LeagueGridItem: View {
                 Spacer()
                 Divider().padding(.horizontal, -10)
                 
-                Text(item.lastPlayedAt ?? "")
+                Text(item.end ?? "")
                     .lineLimit(1)
                     .font(.footnote.weight(.semibold))
                     .foregroundStyle(Color.secondary)

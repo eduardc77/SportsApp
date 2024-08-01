@@ -16,18 +16,16 @@ struct TeamGridItem: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            if let imageURl = URL(string: item.imagePath ?? "") {
-                Color.clear.overlay {
-                    AsyncImageView(url: imageURl, size: .custom(height: 120), contentMode: .fit)
-                }
-                .frame(height: 120)
-                .clipped()
+            if let imageURL = URL(string: item.imagePath ?? "") {
+                AsyncImageView(url: imageURL, size: .custom(height: 120), contentMode: .fit)
+                    .frame(maxWidth: .infinity, maxHeight: 120)
+                    .padding(.vertical)
             } else {
                 Color.secondary.frame(height: 120)
             }
             
             VStack(alignment: .leading, spacing: .xxxSmall) {
-                Text(item.name ?? "")
+                Text(item.name)
                     .lineLimit(1)
                     .font(.callout.weight(.bold))
                     .minimumScaleFactor(0.3)
@@ -52,7 +50,7 @@ struct TeamGridItem: View {
             }
             .padding(10)
         }
-        .frame(minWidth: 160, minHeight: 300, maxHeight: .infinity)
+        .frame(minWidth: 160, minHeight: 280, maxHeight: .infinity)
         .background(Color(.systemGray6))
         .clipShape(RoundedRectangle(cornerRadius: 8))
     }

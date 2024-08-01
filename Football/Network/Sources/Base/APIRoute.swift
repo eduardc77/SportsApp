@@ -3,13 +3,13 @@ import Foundation
 
 /**
  This protocol can be implemented to define API routes.
-
+ 
  An ``APIRoute`` must define an ``httpMethod`` as well as an
  environment-relative path, headers, query params, data, etc.
  
  You can use an enum to define routes, and associated values
  to provide route-specific parameters.
-
+ 
  When a route defines ``formParams``, the URL request should
  use `application/x-www-form-urlencoded` as content type and
  ignore the ``uploadData``. The two are mutually exclusive and
@@ -20,15 +20,15 @@ import Foundation
  global data, while a route defines route-specific data.
  */
 public protocol APIRoute: APIRequestData {
-
+    
     /// The HTTP method to use for the route.
     var httpMethod: HTTPMethod { get }
-
+    
     /// The route's ``ApiEnvironment`` relative path.
     var path: String { get }
     
     var token: String? { get }
-
+    
     /// Optional form data, which is sent as request body.
     var formParams: [String: String]? { get }
     
@@ -51,7 +51,7 @@ extension APIRoute {
 }
 
 public extension APIRoute {
-
+    
     /// Convert ``encodedFormItems`` to `.utf8` encoded data.
     var encodedFormData: Data? {
         guard let formParams, !formParams.isEmpty else { return nil }
@@ -60,26 +60,22 @@ public extension APIRoute {
         let paramString = params.query
         return paramString?.data(using: .utf8)
     }
-
+    
     /// Convert ``formParams`` to form encoded query items.
     var encodedFormItems: [URLQueryItem]? {
         formParams?
             .map { URLQueryItem(name: $0.key, value: $0.value.formEncoded()) }
             .sorted { $0.name < $1.name }
     }
-
+    
     /// Get a `URLRequest` for the route and its properties.
     func urlRequest(for env: APIEnvironment) throws -> URLRequest {
         var urlComponents = URLComponents()
         urlComponents.scheme = env.scheme
         urlComponents.host = env.baseURL
-        if !env.apiVersion.isEmpty {
-            urlComponents.path = env.apiVersion + path
-        } else {
-            urlComponents.path = path
-        }
+        urlComponents.path = pathComponent(for: env)
         urlComponents.queryItems = queryItems(for: env)
-
+        
         guard let requestURL = urlComponents.url else { throw APIError.invalidURLInComponents(urlComponents) }
         var request = URLRequest(url: requestURL)
         let formData = encodedFormData
@@ -88,17 +84,23 @@ public extension APIRoute {
         request.httpMethod = httpMethod.method
         
         if let token = token {
-            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            request.addValue("\(AuthType.bearer.rawValue) \(token)",
+                             forHTTPHeaderField: HTTPHeaderField.authorization.rawValue)
         }
         let isFormRequest = formData != nil
-        let contentType = isFormRequest ? "application/x-www-form-urlencoded" : "application/json"
-        request.setValue(contentType, forHTTPHeaderField: "Content-Type")
+        let contentType: ContentType = isFormRequest ? .form : .json
+        request.setValue(contentType.rawValue, forHTTPHeaderField: HTTPHeaderField.contentType.rawValue)
+        
+        if contentType == .json {
+            request.addValue(ContentType.json.rawValue, forHTTPHeaderField: "Accept")
+            request.addValue("true", forHTTPHeaderField: "X-Use-Cache")
+        }
         return request
     }
 }
 
 public extension APIEnvironment {
-
+    
     /// Get a `URLRequest` for a certain ``ApiRoute``.
     func urlRequest(for route: APIRoute) throws -> URLRequest {
         try route.urlRequest(for: self)
@@ -106,7 +108,7 @@ public extension APIEnvironment {
 }
 
 private extension APIRoute {
-
+    
     func headers(for env: APIEnvironment) -> [String: String] {
         var result = env.headers ?? [:]
         headers?.forEach {
@@ -114,14 +116,44 @@ private extension APIRoute {
         }
         return result
     }
-
+    
     func queryItems(for env: APIEnvironment) -> [URLQueryItem] {
         let routeData = encodedQueryItems ?? []
         let envData = env.encodedQueryItems ?? []
         return routeData + envData
     }
-
-    func urlComponents(from url: URL) -> URLComponents? {
-        URLComponents(url: url, resolvingAgainstBaseURL: true)
+    
+    func pathComponent(for env: APIEnvironment) -> String {
+        var pathComponent = ""
+        if !env.apiVersion.isEmpty {
+            pathComponent += env.apiVersion
+        }
+        if !env.domain.isEmpty {
+            pathComponent += env.domain
+        }
+        pathComponent += path
+        
+        return pathComponent
     }
+}
+
+/**
+ Enum for Content Types
+ */
+enum ContentType: String {
+    case json = "application/json"
+    case form = "application/x-www-form-urlencoded"
+}
+/**
+ Enum for Authe Types
+ */
+enum AuthType: String {
+    case bearer = "Bearer"
+}
+/**
+ Enum for HTTP Heeader Fields
+ */
+enum HTTPHeaderField: String {
+    case contentType = "Content-Type"
+    case authorization = "Authorization"
 }

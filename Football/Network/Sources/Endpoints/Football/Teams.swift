@@ -31,7 +31,7 @@ public extension Football.Teams {
     var queryParams: [String: String]? {
         switch self {
         case .allTeams(let page):
-            return ["page": "\(page)"]
+            return ["page": "\(page)", "include": "players; coaches"]
         case .teamByID(let id):
             return nil
         case .teamByCountryID(let countryID):

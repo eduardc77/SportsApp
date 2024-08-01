@@ -5,10 +5,9 @@ public protocol TeamsServiceable {
     
     func getAllTeams<T: Decodable>(currentPage: Int) async throws -> T
     func getTeamByID<T: Decodable>(_ id: Int) async throws -> T
-    func getLeagueByCountryID<T: Decodable>(_ countryID: Int) async throws -> T
-    func getLeagueBySeasonID<T: Decodable>(_ seasonID: Int) async throws -> T
-    func teamSearch<T: Decodable>(query: String) async throws -> T
-    
+    func getTeamByCountryID<T: Decodable>(_ countryID: Int) async throws -> T
+    func getTeamBySeasonID<T: Decodable>(_ seasonID: Int) async throws -> T
+    func getTeamSearch<T: Decodable>(by query: String) async throws -> T
 }
 
 public struct TeamsService: APIClient, TeamsServiceable {
@@ -20,8 +19,6 @@ public struct TeamsService: APIClient, TeamsServiceable {
     private var decoder: JSONDecoder {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
-        //decoder.dateDecodingStrategy = .iso8601
-        //decoder.dateDecodingStrategy = .millisecondsSince1970
         return decoder
     }
     
@@ -38,19 +35,18 @@ public struct TeamsService: APIClient, TeamsServiceable {
         try await asyncFetchRequest(Football.Teams.teamByID(id), in: environment)
     }
     
-    public func getLeagueByCountryID<T: Decodable>(_ countryID: Int) async throws -> T {
+    public func getTeamByCountryID<T: Decodable>(_ countryID: Int) async throws -> T {
         try await asyncFetchRequest(Football.Teams.teamByCountryID(countryID), in: environment)
     }
     
-    public func getLeagueBySeasonID<T>(_ seasonID: Int) async throws -> T where T : Decodable {
+    public func getTeamBySeasonID<T>(_ seasonID: Int) async throws -> T where T : Decodable {
         try await asyncFetchRequest(Football.Teams.teamBySeasonID(seasonID), in: environment)
     }
     
-    public func teamSearch<T: Decodable>(query: String) async throws -> T {
+    public func getTeamSearch<T: Decodable>(by query: String) async throws -> T {
         try await asyncFetchRequest(Football.Teams.teamSearch(query: query), in: environment)
     }
 }
-
 
 public final class TeamsServiceMock: Mockable, TeamsServiceable {
     
@@ -64,15 +60,15 @@ public final class TeamsServiceMock: Mockable, TeamsServiceable {
         loadJSON(filename: "top_rated_response", type: T.self)
     }
     
-    public func getLeagueByCountryID<T: Decodable>(_ countryID: Int) async throws -> T {
+    public func getTeamByCountryID<T: Decodable>(_ countryID: Int) async throws -> T {
         loadJSON(filename: "top_rated_response", type: T.self)
     }
     
-    public func getLeagueBySeasonID<T>(_ seasonID: Int) async throws -> T where T : Decodable {
+    public func getTeamBySeasonID<T>(_ seasonID: Int) async throws -> T where T : Decodable {
         loadJSON(filename: "top_rated_response", type: T.self)
     }
     
-    public func teamSearch<T: Decodable>(query: String) async throws -> T {
+    public func getTeamSearch<T: Decodable>(by query: String) async throws -> T {
         loadJSON(filename: "top_rated_response", type: T.self)
     }
 }

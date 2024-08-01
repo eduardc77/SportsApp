@@ -9,8 +9,8 @@ import Network
 final class TeamsViewModel: BaseViewModel<ViewState> {
     let teamsService: TeamsServiceable
     
-    @Published private(set) var teamsResponseModel: TeamsResponseModel?
-    @Published private(set) var allTeams = [Team]()
+    private(set) var teamsResponseModel: TeamsResponseModel?
+    private(set) var allTeams = [Team]()
     
     var currentPage: Int {
         (teamsResponseModel?.pagination.currentPage ?? 0) + 1
@@ -38,7 +38,6 @@ final class TeamsViewModel: BaseViewModel<ViewState> {
             }
             self.teamsResponseModel = result
             self.changeState(.finished)
-            print(result)
         } catch {
             self.changeState(.error(error: error.localizedDescription))
         }
@@ -53,6 +52,7 @@ final class TeamsViewModel: BaseViewModel<ViewState> {
         await fetchAllTeams(page: 1)
     }
     
+    @MainActor
     func changeStateToEmpty() {
         changeState(.empty)
     }

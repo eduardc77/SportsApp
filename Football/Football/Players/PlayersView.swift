@@ -1,21 +1,21 @@
 //
-//  LeaguesView.swift
+//  PlayersView.swift
 //  FootballApp
 //
 
 import SwiftUI
 import Network
 
-struct LeaguesView: View {
-    @State private var model = LeaguesViewModel()
+struct PlayersView: View {
+    @State private var model = PlayersViewModel()
     
     @EnvironmentObject private var router: ViewRouter
     @EnvironmentObject private var tabCoordinator: AppTabRouter
     @EnvironmentObject private var modalRouter: ModalScreenRouter
-
+    
     var body: some View {
         baseView()
-            .navigationBar(title: "Leagues")
+            .navigationBar(title: "Players")
             .refreshable {
                 Task {
                     await model.refresh()
@@ -30,7 +30,7 @@ struct LeaguesView: View {
             Label("No Data", systemImage: "newspaper")
         case .finished:
             ScrollView {
-                leaguesGrid
+                playersGrid
             }
         case .loading:
             ProgressView("Loading")
@@ -59,15 +59,15 @@ struct LeaguesView: View {
 
 // MARK: - Subviews
 
-private extension LeaguesView {
+private extension PlayersView {
     
-    var leaguesGrid: some View {
+    var playersGrid: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
-            ForEach(model.allLeagues, id: \.id) { league in
+            ForEach(model.allPlayers, id: \.id) { player in
                 Button {
-//                    router.push(league)
+                    // router.push(league)
                 } label: {
-                    LeagueGridItem(item: league)
+                    PlayerGridItem(item: player)
                 }
             }
             
@@ -75,7 +75,7 @@ private extension LeaguesView {
                 .fill(.clear)
                 .frame(height: 20) // Bottom padding
                 .task {
-                    if model.state != .loading, !model.allLeagues.isEmpty {
+                    if model.state != .loading, !model.allPlayers.isEmpty {
                         await model.loadMoreContent()
                     }
                 }

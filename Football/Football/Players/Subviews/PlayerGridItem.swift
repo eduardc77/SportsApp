@@ -1,16 +1,16 @@
 //
-//  LeagueGridItem.swift
+//  PlayerGridItem.swift
 //  FootballApp
 //
 
 import SwiftUI
 import Network
 
-struct LeagueGridItem: View {
-    let item: League
+struct PlayerGridItem: View {
+    let item: Player
     @State var isEmpty = false
     
-    init(item: League) {
+    init(item: Player) {
         self.item = item
     }
     
@@ -25,14 +25,14 @@ struct LeagueGridItem: View {
             }
             
             VStack(alignment: .leading, spacing: .xxxSmall) {
-                Text(item.name ?? "")
+                Text(item.firstname ?? "")
                     .lineLimit(1)
                     .font(.callout.weight(.bold))
                     .minimumScaleFactor(0.3)
                     .foregroundStyle(.primary)
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                Text(item.type ?? "")
+                Text(item.lastname ?? "")
                     .lineLimit(5)
                     .font(.callout.weight(.semibold))
                     .multilineTextAlignment(.leading)
@@ -42,7 +42,7 @@ struct LeagueGridItem: View {
                 Spacer()
                 Divider().padding(.horizontal, -10)
                 
-                Text(item.lastPlayedAt ?? "")
+                Text(item.gender ?? "")
                     .lineLimit(1)
                     .font(.footnote.weight(.semibold))
                     .foregroundStyle(Color.secondary)

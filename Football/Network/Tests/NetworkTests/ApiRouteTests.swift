@@ -9,7 +9,6 @@ final class ApiRouteTests: XCTestCase {
         return try? route.urlRequest(for: env)
     }
 
-
     func testEncodedFormItemsAreSortedAndEncoded() throws {
         let route = TestRoute.formLogin(userName: "johnappleseed", password: "let's code, shall we? & do more stuff +")
         let items = route.encodedFormItems

@@ -8,6 +8,7 @@ import SwiftUI
 enum AppScreen: Codable, Hashable, Identifiable, CaseIterable {
     case leagues
     case teams
+    case players
     case settings
     
     var id: AppScreen { self }
@@ -20,7 +21,9 @@ extension AppScreen {
         case .leagues:
             Label("Leagues", systemImage: "trophy.fill")
         case .teams:
-            Label("Teams", systemImage: "figure.soccer")
+            Label("Teams", systemImage: "soccerball")
+        case .players:
+            Label("Players", systemImage: "figure.soccer")
         case .settings:
             Label("Settings", systemImage: "gearshape.fill")
         }
@@ -33,6 +36,8 @@ extension AppScreen {
             LeaguesCoordinator()
         case .teams:
             TeamsCoordinator()
+        case .players:
+            PlayersCoordinator()
         case .settings:
             SettingsCoordinator()
         }

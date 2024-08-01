@@ -53,6 +53,7 @@ final class LeaguesViewModel: BaseViewModel<ViewState> {
         await fetchAllLeagues(page: 1)
     }
     
+    @MainActor 
     func changeStateToEmpty() {
         changeState(.empty)
     }

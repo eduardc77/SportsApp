@@ -7,7 +7,7 @@ import SwiftUI
 import Network
 
 struct TeamsView: View {
-    @StateObject private var model = TeamsViewModel()
+    @State private var model = TeamsViewModel()
     
     @EnvironmentObject private var router: ViewRouter
     @EnvironmentObject private var tabCoordinator: AppTabRouter
@@ -15,7 +15,7 @@ struct TeamsView: View {
     
     var body: some View {
         baseView()
-            .navigationBar(title: "News")
+            .navigationBar(title: "Teams")
             .refreshable {
                 Task {
                     await model.refresh()
@@ -63,9 +63,9 @@ private extension TeamsView {
     
     var teamsGrid: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
-            ForEach(Array(model.allTeams.enumerated()), id: \.offset) { index, team in
+            ForEach(model.allTeams, id: \.id) { team in
                 SwiftUI.Button {
-                    //router.push(league)
+                    router.push(TeamDestination.teamSquad(id: team.id))
                 } label: {
                     TeamGridItem(item: team)
                 }

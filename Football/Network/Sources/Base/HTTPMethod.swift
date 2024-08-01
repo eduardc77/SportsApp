@@ -20,24 +20,3 @@ public enum HTTPMethod: String, CaseIterable, Identifiable {
     /// The uppercased HTTP method name.
     public var method: String { id.uppercased() }
 }
-
-
-/**
- Enum for Content Types
- */
-enum ContentType: String {
-    case json = "application/json"
-}
-/**
- Enum for Authe Types
- */
-enum AuthType: String {
-    case bearer = "Bearer"
-}
-/**
- Enum for HTTP Heeader Fields
- */
-enum HTTPHeaderField: String {
-    case contentType = "Content-Type"
-    case authorization = "Authorization"
-}

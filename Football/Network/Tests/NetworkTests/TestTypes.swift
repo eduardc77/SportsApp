@@ -4,7 +4,7 @@ import Combine
 @testable import Network
 
 class TestClient: APIClient {
-
+    
     init(
         data: Data = .init(),
         response: HTTPURLResponse = TestResponse.withStatusCode(200),
@@ -14,7 +14,7 @@ class TestClient: APIClient {
         self.response = response
         self.error = error
     }
-
+    
     let data: Data
     let response: HTTPURLResponse
     let error: Error?
@@ -23,20 +23,20 @@ class TestClient: APIClient {
      This type can be returned by an ``ApiClient`` when a client
      requests data from an external API.
      */
-    public struct APIResult {
-
-        public init(
+    struct APIResult {
+        
+        init(
             data: Data,
             response: URLResponse
         ) {
             self.data = data
             self.response = response
         }
-
-        public var data: Data
-        public var response: URLResponse
+        
+        var data: Data
+        var response: URLResponse
     }
-
+    
 }
 
 class TestResponse: HTTPURLResponse {
@@ -60,34 +60,34 @@ class TestResponse: HTTPURLResponse {
 }
 
 enum TestEnvironment: APIEnvironment {
-
+    
     case staging
     case production
-
+    
     var baseURL: String {
         switch self {
         case .staging: return "staging-api.imdb.com"
         case .production: return "api.imdb.com"
         }
     }
-
+    
     var headers: [String: String]? {
         ["api-secret": "APISECRET"]
     }
-
+    
     var queryParams: [String: String]? {
         ["api-key": "APIKEY"]
     }
 }
 
 enum TestRoute: APIRoute {
-
+    
     case formLogin(userName: String, password: String)
     case movie(id: String)
     case postLogin(userName: String, password: String)
     case search(query: String, page: Int)
     case searchWithArrayParams(years: [Int])
-
+    
     var httpMethod: HTTPMethod {
         switch self {
         case .formLogin: return .post
@@ -97,7 +97,7 @@ enum TestRoute: APIRoute {
         case .searchWithArrayParams: return .get
         }
     }
-
+    
     var path: String {
         switch self {
         case .formLogin: return "/formLogin"
@@ -107,11 +107,11 @@ enum TestRoute: APIRoute {
         case .searchWithArrayParams: return "/search"
         }
     }
-
+    
     var headers: [String: String]? {
         ["locale": "sv-SE"]
     }
-
+    
     var formParams: [String: String]? {
         switch self {
         case .formLogin(let userName, let password):
@@ -119,7 +119,7 @@ enum TestRoute: APIRoute {
         default: return nil
         }
     }
-
+    
     var uploadData: Data? {
         switch self {
         case .formLogin: return nil
@@ -134,7 +134,7 @@ enum TestRoute: APIRoute {
         case .searchWithArrayParams: return nil
         }
     }
-
+    
     var queryParams: [String: String]? {
         switch self {
         case .search(let query, let page): return [
@@ -151,26 +151,25 @@ enum TestRoute: APIRoute {
     var mockFile: String? { "" }
 }
 
-
 struct TestLoginRequest: Codable {
-
+    
     var userName: String
     var password: String
 }
 
 enum TestError: Error, Equatable {
-
+    
     case baboooom
 }
 
 struct TestMovie: Codable {
-
+    
     var id: String
     var name: String
 }
 
 struct TestPerson: Codable {
-
+    
     var id: String
     var firstName: String
     var lastName: String

@@ -5,13 +5,12 @@
 
 import Foundation
 
-class BaseViewModel<State: ViewStateProtocol>: ObservableObject {
-    @Published var state: State = .initial
+@Observable
+class BaseViewModel<State: ViewStateProtocol> {
+    var state: State = .initial
     
+    @MainActor
     func changeState(_ state: State) {
-        DispatchQueue.main.async { [weak self] in
-            self?.state = state
-            //            debugPrint("State changed to \(state)")
-        }
+        self.state = state
     }
 }

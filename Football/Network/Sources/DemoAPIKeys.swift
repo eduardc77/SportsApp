@@ -1,4 +1,4 @@
 
 public struct DemoAPIKeys {
-    public static let sportMonksToken = "LedPYLCtcpMicvCrPIqhqjTFtdrKVaO2EcyhjidiHs2vPWBv42ThWObHa09V"
+    public static let sportMonksToken = "LDdYF0z1IPwgKj9bhMr7s64xOdlnzlRcvxoSKJ6MLrfJ5LHgBGx8WcvjgyAZ"
 }
