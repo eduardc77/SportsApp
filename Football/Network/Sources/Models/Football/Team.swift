@@ -12,7 +12,6 @@ public struct Team: Decodable, Hashable {
     public let type: String?
     public let placeholder: Bool?
     public let lastPlayedAt: String?
-    public let players: [Player]?
 }
 
 public struct TeamsResponseModel: Decodable {

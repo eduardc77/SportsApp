@@ -34,13 +34,13 @@ final class PlayersViewModel: BaseViewModel<ViewState> {
             
             if page == 1 {
                 allPlayers = result.data
-            } else{
-                self.updateAllPlayersData(with: result)
+            } else {
+                updateAllPlayersData(with: result)
             }
-            self.playersResponseModel = result
-            self.changeState(.finished)
+            playersResponseModel = result
+            changeState(.finished)
         } catch {
-            self.changeState(.error(error: error.localizedDescription))
+            changeState(.error(error: error.localizedDescription))
         }
     }
     

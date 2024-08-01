@@ -38,7 +38,7 @@ final class SquadViewModel: BaseViewModel<ViewState> {
             if page == 1 {
                 teamSquad = result.data
             } else {
-                self.updateTeamSquadData(with: result)
+                updateTeamSquadData(with: result)
             }
             
             for (index, player) in teamSquad.enumerated() {
@@ -47,10 +47,10 @@ final class SquadViewModel: BaseViewModel<ViewState> {
                 teamSquad[index].gender = playerResult.data.gender
                 teamSquad[index].imagePath = playerResult.data.imagePath
             }
-            self.playersResponseModel = result
-            self.changeState(.finished)
+            playersResponseModel = result
+            changeState(.finished)
         } catch {
-            self.changeState(.error(error: error.localizedDescription))
+            changeState(.error(error: error.localizedDescription))
         }
     }
     

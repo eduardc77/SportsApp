@@ -16,7 +16,7 @@ public struct PlayersService: APIClient, PlayersServiceable {
     
     public var session: URLSession
     
-    private var decoder: JSONDecoder {
+    private static var decoder: JSONDecoder {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
@@ -28,23 +28,23 @@ public struct PlayersService: APIClient, PlayersServiceable {
     }
     
     public func getAllPlayers<T: Decodable>(currentPage: Int) async throws -> T {
-        try await asyncFetchRequest(Football.Players.allPlayers(page: currentPage), in: environment, decoder: decoder)
+        try await asyncFetchRequest(Football.Players.allPlayers(page: currentPage), in: environment, decoder: PlayersService.decoder)
     }
     
     public func getPlayerByID<T: Decodable>(_ id: Int) async throws -> T {
-        try await asyncFetchRequest(Football.Players.playerByID(id), in: environment)
+        try await asyncFetchRequest(Football.Players.playerByID(id), in: environment, decoder: PlayersService.decoder)
     }
     
     public func getPlayersByCountryID<T: Decodable>(_ countryID: Int) async throws -> T {
-        try await asyncFetchRequest(Football.Players.playersByCountryID(countryID), in: environment)
+        try await asyncFetchRequest(Football.Players.playersByCountryID(countryID), in: environment, decoder: PlayersService.decoder)
     }
 
     public func getPlayersSearch<T: Decodable>(by query: String) async throws -> T {
-        try await asyncFetchRequest(Football.Players.playersSearch(query: query), in: environment)
+        try await asyncFetchRequest(Football.Players.playersSearch(query: query), in: environment, decoder: PlayersService.decoder)
     }
     
     public func getLastUpdatedPlayers<T: Decodable>() async throws -> T {
-        try await asyncFetchRequest(Football.Players.lastUpdatedPlayers, in: environment)
+        try await asyncFetchRequest(Football.Players.lastUpdatedPlayers, in: environment, decoder: PlayersService.decoder)
     }
 }
 

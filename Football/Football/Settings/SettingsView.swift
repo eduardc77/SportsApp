@@ -57,9 +57,7 @@ struct SettingsView: View {
             .listRowBackground(Color.clear)
         }
         .formStyle(.grouped)
-        .navigationTitle("Settings")
-        .environment(\.defaultMinListHeaderHeight, 0)
-        .environment(\.defaultMinListRowHeight, 20)
+        .navigationBar(title: "Settings")
     }
     
     var appThemeColorPicker: some View {

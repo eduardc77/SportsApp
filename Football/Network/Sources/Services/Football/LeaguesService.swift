@@ -17,7 +17,7 @@ public struct LeaguesService: APIClient, LeaguesServiceable {
     
     public var session: URLSession
     
-    private var decoder: JSONDecoder {
+    private static var decoder: JSONDecoder {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         //decoder.dateDecodingStrategy = .iso8601
@@ -31,27 +31,27 @@ public struct LeaguesService: APIClient, LeaguesServiceable {
     }
     
     public func getAllLeagues<T>(currentPage: Int) async throws -> T where T : Decodable {
-        try await asyncFetchRequest(Football.Leagues.allLeagues(page: currentPage), in: environment, decoder: decoder)
+        try await asyncFetchRequest(Football.Leagues.allLeagues(page: currentPage), in: environment, decoder: LeaguesService.decoder)
     }
     
     public func getLeagueByID<T: Decodable>(_ id: Int) async throws -> T {
-        try await asyncFetchRequest(Football.Leagues.leagueByID(id), in: environment)
+        try await asyncFetchRequest(Football.Leagues.leagueByID(id), in: environment, decoder: LeaguesService.decoder)
     }
     
     public func getLeaguesLive<T: Decodable>() async throws -> T {
-        try await asyncFetchRequest(Football.Leagues.leagueLive, in: environment)
+        try await asyncFetchRequest(Football.Leagues.leagueLive, in: environment, decoder: LeaguesService.decoder)
     }
     
     public func getLeagueByFixtureDate<T>(date: String) async throws -> T where T : Decodable {
-        try await asyncFetchRequest(Football.Leagues.leagueByFixtureDate(date: date), in: environment)
+        try await asyncFetchRequest(Football.Leagues.leagueByFixtureDate(date: date), in: environment, decoder: LeaguesService.decoder)
     }
     
     public func getLeaguesByCountryID<T: Decodable>(_ countryID: Int) async throws -> T {
-        try await asyncFetchRequest(Football.Leagues.leagueByCountryID(countryID), in: environment)
+        try await asyncFetchRequest(Football.Leagues.leagueByCountryID(countryID), in: environment, decoder: LeaguesService.decoder)
     }
     
     public func getLeagueSearch<T: Decodable>(by query: String) async throws -> T {
-        try await asyncFetchRequest(Football.Leagues.leaguesSearch(query: query), in: environment)
+        try await asyncFetchRequest(Football.Leagues.leaguesSearch(query: query), in: environment, decoder: LeaguesService.decoder)
     }
 }
 

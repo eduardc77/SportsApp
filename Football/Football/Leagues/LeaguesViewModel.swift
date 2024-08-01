@@ -34,13 +34,13 @@ final class LeaguesViewModel: BaseViewModel<ViewState> {
             
             if page == 1 {
                 allLeagues = result.data
-            } else{
-                self.updateAllLeaguesData(with: result)
+            } else {
+                updateAllLeaguesData(with: result)
             }
-            self.leaguesResponseModel = result
-            self.changeState(.finished)
+            leaguesResponseModel = result
+            changeState(.finished)
         } catch {
-            self.changeState(.error(error: error.localizedDescription))
+            changeState(.error(error: error.localizedDescription))
         }
     }
     

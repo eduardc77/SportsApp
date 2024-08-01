@@ -14,7 +14,7 @@ public struct SquadsService: APIClient, SquadsServiceable {
     
     public var session: URLSession
     
-    private var decoder: JSONDecoder {
+    private static var decoder: JSONDecoder {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
@@ -26,15 +26,15 @@ public struct SquadsService: APIClient, SquadsServiceable {
     }
     
     public func getSquadsByTeamID<T>(_ teamID: Int, currentPage: Int) async throws -> T where T : Decodable {
-        try await asyncFetchRequest(Football.Squads.squadsByTeamID(teamID, page: currentPage), in: environment, decoder: decoder)
+        try await asyncFetchRequest(Football.Squads.squadsByTeamID(teamID, page: currentPage), in: environment, decoder: SquadsService.decoder)
     }
     
     public func getExtendedSquadByTeamID<T: Decodable>(_ teamID: Int, currentPage: Int) async throws -> T {
-        try await asyncFetchRequest(Football.Squads.extendedSquadByTeamID(teamID, page: currentPage), in: environment)
+        try await asyncFetchRequest(Football.Squads.extendedSquadByTeamID(teamID, page: currentPage), in: environment, decoder: SquadsService.decoder)
     }
 
     public func getSquadsBySeasonID<T>(_ seasonID: Int, teamID: Int, currentPage: Int) async throws -> T where T : Decodable {
-        try await asyncFetchRequest(Football.Squads.squadsBySeasonID(seasonID, teamID: teamID, page: currentPage), in: environment)
+        try await asyncFetchRequest(Football.Squads.squadsBySeasonID(seasonID, teamID: teamID, page: currentPage), in: environment, decoder: SquadsService.decoder)
     }
 }
 

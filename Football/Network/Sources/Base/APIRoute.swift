@@ -27,8 +27,6 @@ public protocol APIRoute: APIRequestData {
     /// The route's ``ApiEnvironment`` relative path.
     var path: String { get }
     
-    var token: String? { get }
-    
     /// Optional form data, which is sent as request body.
     var formParams: [String: String]? { get }
     
@@ -39,9 +37,6 @@ public protocol APIRoute: APIRequestData {
 }
 
 extension APIRoute {
-    
-    // Default values
-    public var token: String? { nil }
     
     public var headers: [String: String]? { nil }
     
@@ -82,11 +77,7 @@ public extension APIRoute {
         request.allHTTPHeaderFields = headers(for: env)
         request.httpBody = formData ?? uploadData
         request.httpMethod = httpMethod.method
-        
-        if let token = token {
-            request.addValue("\(AuthType.bearer.rawValue) \(token)",
-                             forHTTPHeaderField: HTTPHeaderField.authorization.rawValue)
-        }
+
         let isFormRequest = formData != nil
         let contentType: ContentType = isFormRequest ? .form : .json
         request.setValue(contentType.rawValue, forHTTPHeaderField: HTTPHeaderField.contentType.rawValue)

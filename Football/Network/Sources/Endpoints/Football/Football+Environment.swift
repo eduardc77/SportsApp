@@ -24,21 +24,19 @@ public extension Football.Environment {
         case .production: return nil
         case .preproduction: return nil
         case .develop(let apiToken):
-            return [
-                "Authorization": "\(apiToken)"
-            ]
+            return ["Authorization": "\(apiToken)"]
         }
     }
     
     var queryParams: [String : String]? {
-//        switch self {
-//        case .production: return nil
-//        case .preproduction: return nil
-//        case .develop(let apiToken):
-//            return [
-//                "api_token": "\(apiToken)"
-//            ]
-//        }
+        // switch self {
+        // case .production: return nil
+        // case .preproduction: return nil
+        // case .develop(let apiToken):
+        //     return [
+        //         "api_token": "\(apiToken)"
+        //     ]
+        // }
         return nil
     }
     

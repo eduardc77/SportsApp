@@ -20,7 +20,7 @@ final class TeamsViewModel: BaseViewModel<ViewState> {
     init(teamsService: TeamsServiceable = TeamsService()) { // NewsServiceMock()
         self.teamsService = teamsService
     }
-
+    
     @MainActor
     func fetchAllTeams(page: Int? = nil) async {
         guard state != .empty else { return }
@@ -33,13 +33,13 @@ final class TeamsViewModel: BaseViewModel<ViewState> {
             let result: TeamsResponseModel = try await teamsService.getAllTeams(currentPage: page ?? currentPage)
             if page == 1 {
                 allTeams = result.data
-            } else{
-                self.updateAllTeamsData(with: result)
+            } else {
+                updateAllTeamsData(with: result)
             }
-            self.teamsResponseModel = result
-            self.changeState(.finished)
+            teamsResponseModel = result
+            changeState(.finished)
         } catch {
-            self.changeState(.error(error: error.localizedDescription))
+            changeState(.error(error: error.localizedDescription))
         }
     }
     

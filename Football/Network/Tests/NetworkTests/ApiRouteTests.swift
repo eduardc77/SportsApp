@@ -26,14 +26,16 @@ final class ApiRouteTests: XCTestCase {
         XCTAssertNotNil(request(for: .postLogin(userName: "johnappleseed", password: "super-secret")))
         XCTAssertNotNil(request(for: .search(query: "A nice movie", page: 1)))
     }
-
+    
     func testURLRequestIsPropertyConfiguredForGetRequestsWithQueryParameters() throws {
         let route = TestRoute.search(query: "movies&+", page: 1)
         let request = request(for: route)
         XCTAssertEqual(request?.allHTTPHeaderFields, [
             "Content-Type": "application/json",
+            "Accept": "application/json",
             "locale": "sv-SE",
-            "api-secret": "APISECRET"
+            "api-secret": "APISECRET",
+            "X-Use-Cache": "true",
         ])
         XCTAssertEqual(request?.httpMethod, "GET")
         XCTAssertEqual(request?.url?.absoluteString, "https://api.imdb.com/search?p=1&q=movies%26+&api-key=APIKEY")
@@ -44,8 +46,10 @@ final class ApiRouteTests: XCTestCase {
         let request = request(for: route)
         XCTAssertEqual(request?.allHTTPHeaderFields, [
             "Content-Type": "application/json",
+            "Accept": "application/json",
             "locale": "sv-SE",
-            "api-secret": "APISECRET"
+            "api-secret": "APISECRET",
+            "X-Use-Cache": "true",
         ])
         XCTAssertEqual(request?.httpMethod, "GET")
         XCTAssertEqual(request?.url?.absoluteString, "https://api.imdb.com/search?years=%5B2021,2022,2023%5D&api-key=APIKEY")
@@ -79,8 +83,10 @@ final class ApiRouteTests: XCTestCase {
         }
         XCTAssertEqual(request?.allHTTPHeaderFields, [
             "Content-Type": "application/json",
+            "Accept": "application/json",
             "locale": "sv-SE",
-            "api-secret": "APISECRET"
+            "api-secret": "APISECRET",
+            "X-Use-Cache": "true",
         ])
         XCTAssertEqual(request?.url?.absoluteString, "https://api.imdb.com/postLogin?api-key=APIKEY")
         XCTAssertEqual(request?.httpMethod, "POST")
