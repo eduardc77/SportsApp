@@ -1,6 +1,5 @@
 
 public struct Player: Decodable, Hashable {
-
     public let id: Int
     public let sportId: Int?
     public let countryId: Int?
@@ -39,7 +38,7 @@ public struct PlayerResponseModel: Decodable {
 
 public struct PlayersResponseModel: Decodable {
     public let data: [Player]
-    public let pagination: Pagination?
+    public let pagination: Pagination
     public let subscription: [Subscription]?
     public let rateLimit: RateLimit
     public let timezone: String

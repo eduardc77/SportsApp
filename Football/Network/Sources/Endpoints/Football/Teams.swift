@@ -32,13 +32,13 @@ public extension Football.Teams {
         switch self {
         case .allTeams(let page):
             return ["page": "\(page)"]
-        case .teamByID(let id):
+        case .teamByID:
             return nil
-        case .teamByCountryID(let countryID):
+        case .teamByCountryID:
             return nil
-        case .teamBySeasonID(let seasonID):
+        case .teamBySeasonID:
             return nil
-        case .teamSearch(let query):
+        case .teamSearch:
             return nil
         }
     }

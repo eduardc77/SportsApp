@@ -25,15 +25,15 @@ public struct SquadsService: APIClient, SquadsServiceable {
         self.session = session
     }
     
-    public func getSquadsByTeamID<T>(_ teamID: Int, currentPage: Int) async throws -> T where T : Decodable {
+    public func getSquadsByTeamID<T: Decodable>(_ teamID: Int, currentPage: Int) async throws -> T {
         try await asyncFetchRequest(Football.Squads.squadsByTeamID(teamID, page: currentPage), in: environment, decoder: SquadsService.decoder)
     }
     
     public func getExtendedSquadByTeamID<T: Decodable>(_ teamID: Int, currentPage: Int) async throws -> T {
         try await asyncFetchRequest(Football.Squads.extendedSquadByTeamID(teamID, page: currentPage), in: environment, decoder: SquadsService.decoder)
     }
-
-    public func getSquadsBySeasonID<T>(_ seasonID: Int, teamID: Int, currentPage: Int) async throws -> T where T : Decodable {
+    
+    public func getSquadsBySeasonID<T: Decodable>(_ seasonID: Int, teamID: Int, currentPage: Int) async throws -> T {
         try await asyncFetchRequest(Football.Squads.squadsBySeasonID(seasonID, teamID: teamID, page: currentPage), in: environment, decoder: SquadsService.decoder)
     }
 }
@@ -42,15 +42,15 @@ public final class SquadsServiceMock: Mockable, SquadsServiceable {
     
     public init() {}
     
-    public func getSquadsByTeamID<T>(_ teamID: Int, currentPage: Int) async throws -> T where T : Decodable {
+    public func getSquadsByTeamID<T: Decodable>(_ teamID: Int, currentPage: Int) async throws -> T {
         loadJSON(filename: "top_rated_response", type: T.self)
     }
     
     public func getExtendedSquadByTeamID<T: Decodable>(_ teamID: Int, currentPage: Int) async throws -> T {
         loadJSON(filename: "top_rated_response", type: T.self)
     }
-
-    public func getSquadsBySeasonID<T>(_ seasonID: Int, teamID: Int, currentPage: Int) async throws -> T where T : Decodable {
+    
+    public func getSquadsBySeasonID<T: Decodable>(_ seasonID: Int, teamID: Int, currentPage: Int) async throws -> T {
         loadJSON(filename: "top_rated_response", type: T.self)
     }
 }

@@ -8,7 +8,6 @@ import Network
 
 final class SquadViewModel: BaseViewModel<ViewState> {
     let squadsService: SquadsServiceable
-    let playersService: PlayersServiceable
     
     private(set) var playersResponseModel: PlayersResponseModel?
     private(set) var teamSquad = [Player]()
@@ -16,13 +15,12 @@ final class SquadViewModel: BaseViewModel<ViewState> {
     private(set) var teamID: Int
     
     var currentPage: Int {
-        (playersResponseModel?.pagination?.currentPage ?? 0) + 1
+        (playersResponseModel?.pagination.currentPage ?? 0) + 1
     }
     
-    init(teamID: Int, squadsService: SquadsServiceable = SquadsService(), playersService: PlayersServiceable = PlayersService()) {
+    init(teamID: Int, squadsService: SquadsServiceable = SquadsService()) {
         self.teamID = teamID
         self.squadsService = squadsService
-        self.playersService = playersService
     }
     
     @MainActor
@@ -32,20 +30,12 @@ final class SquadViewModel: BaseViewModel<ViewState> {
         if currentPage == 1 || teamSquad.isEmpty {
             self.changeState(.loading)
         }
-        
         do {
             let result: PlayersResponseModel = try await squadsService.getSquadsByTeamID(teamID, currentPage: page ?? currentPage)
             if page == 1 {
                 teamSquad = result.data
             } else {
                 updateTeamSquadData(with: result)
-            }
-            
-            for (index, player) in teamSquad.enumerated() {
-                let playerResult: PlayerResponseModel = try await playersService.getPlayerByID(player.playerId ?? 0)
-                teamSquad[index].name = playerResult.data.name
-                teamSquad[index].gender = playerResult.data.gender
-                teamSquad[index].imagePath = playerResult.data.imagePath
             }
             playersResponseModel = result
             changeState(.finished)
@@ -55,7 +45,7 @@ final class SquadViewModel: BaseViewModel<ViewState> {
     }
     
     func loadMoreContent() async {
-        guard playersResponseModel?.pagination?.nextPage != nil else { return }
+        guard playersResponseModel?.pagination.nextPage != nil else { return }
         await fetchTeamSquad()
     }
     

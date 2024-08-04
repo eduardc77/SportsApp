@@ -1,25 +1,25 @@
 //
-//  SquadView.swift
+//  SeasonsView.swift
 //  FootballApp
 //
 
 import SwiftUI
 import Network
 
-struct SquadView: View {
-    @State private var model: SquadViewModel
+struct SeasonsView: View {
+    @State private var model: SeasonsViewModel
     
     @EnvironmentObject private var router: ViewRouter
     @EnvironmentObject private var tabCoordinator: AppTabRouter
     @EnvironmentObject private var modalRouter: ModalScreenRouter
     
-    init(teamID: Int) {
-        model = SquadViewModel(teamID: teamID)
+    init(seasons: [Season] = []) {
+        model = SeasonsViewModel(seasons: seasons)
     }
     
     var body: some View {
         baseView()
-            .navigationBar(title: "Team Squad")
+            .navigationBar(title: "Stages")
             .refreshable {
                 Task {
                     await model.refresh()
@@ -34,7 +34,7 @@ struct SquadView: View {
             Label("No Data", systemImage: "newspaper")
         case .finished:
             ScrollView {
-                squadGrid
+                seasonsGrid
             }
         case .loading:
             ProgressView("Loading")
@@ -45,7 +45,7 @@ struct SquadView: View {
             }
             .onFirstAppear {
                 modalRouter.presentAlert(title: "Error", message: error) {
-                    Button("Ok") {
+                    Button("OK") {
                         model.changeStateToEmpty()
                     }
                 }
@@ -53,6 +53,7 @@ struct SquadView: View {
         case .initial:
             ProgressView()
                 .onAppear {
+                    guard model.allSeasons.isEmpty else { return }
                     Task {
                         await model.fetchTeamSquad()
                     }
@@ -63,15 +64,15 @@ struct SquadView: View {
 
 // MARK: - Subviews
 
-private extension SquadView {
+private extension SeasonsView {
     
-    var squadGrid: some View {
+    var seasonsGrid: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
-            ForEach(model.teamSquad, id: \.id) { player in
+            ForEach(model.allSeasons, id: \.id) { season in
                 SwiftUI.Button {
                     
                 } label: {
-                    SquadGridItem(item: player)
+                    SeasonGridItem(item: season)
                 }
             }
             
@@ -79,7 +80,7 @@ private extension SquadView {
                 .fill(.clear)
                 .frame(height: 20) // Bottom padding
                 .task {
-                    if model.state != .loading, !model.teamSquad.isEmpty {
+                    if model.state != .loading, !model.allSeasons.isEmpty {
                         await model.loadMoreContent()
                     }
                 }
@@ -90,6 +91,6 @@ private extension SquadView {
 
 #Preview {
     NavigationStack {
-        TeamsView()
+        SeasonsView()
     }
 }

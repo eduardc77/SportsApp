@@ -13,7 +13,7 @@ final class PlayersViewModel: BaseViewModel<ViewState> {
     private(set) var allPlayers = [Player]()
     
     var currentPage: Int {
-        (playersResponseModel?.pagination?.currentPage ?? 0) + 1
+        (playersResponseModel?.pagination.currentPage ?? 0) + 1
     }
     
     //Use dependency injection not assigning in the initializer
@@ -45,7 +45,7 @@ final class PlayersViewModel: BaseViewModel<ViewState> {
     }
     
     func loadMoreContent() async {
-        guard playersResponseModel?.pagination?.nextPage != nil else { return }
+        guard playersResponseModel?.pagination.nextPage != nil else { return }
         await fetchAllLeagues()
     }
     

@@ -18,18 +18,18 @@ public extension Football.Squads {
             return "/squads/teams/\(id)"
         case .extendedSquadByTeamID(let id, _):
             return "/squads/teams/\(id)/extended"
-        case .squadsBySeasonID(let seasonID, let teamID, let page):
+        case .squadsBySeasonID(let seasonID, let teamID, _):
             return "/squads/seasons/\(seasonID)/teams/\(teamID)"
         }
     }
     
     var queryParams: [String: String]? {
         switch self {
-        case .squadsByTeamID(let id, let page):
+        case .squadsByTeamID(_ , let page):
             return ["page": "\(page)"]
-        case .extendedSquadByTeamID(let id, let page):
+        case .extendedSquadByTeamID(_ , let page):
             return ["page": "\(page)"]
-        case .squadsBySeasonID(let seasonID, let teamID, let page):
+        case .squadsBySeasonID(_ , _, let page):
             return ["page": "\(page)"]
         }
     }

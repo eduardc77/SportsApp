@@ -27,7 +27,7 @@ public struct TeamsService: APIClient, TeamsServiceable {
         self.session = session
     }
     
-    public func getAllTeams<T>(currentPage: Int) async throws -> T where T : Decodable {
+    public func getAllTeams<T: Decodable>(currentPage: Int) async throws -> T {
         try await asyncFetchRequest(Football.Teams.allTeams(page: currentPage), in: environment, decoder: TeamsService.decoder)
     }
     
@@ -39,7 +39,7 @@ public struct TeamsService: APIClient, TeamsServiceable {
         try await asyncFetchRequest(Football.Teams.teamByCountryID(countryID), in: environment, decoder: TeamsService.decoder)
     }
     
-    public func getTeamBySeasonID<T>(_ seasonID: Int) async throws -> T where T : Decodable {
+    public func getTeamBySeasonID<T: Decodable>(_ seasonID: Int) async throws -> T {
         try await asyncFetchRequest(Football.Teams.teamBySeasonID(seasonID), in: environment, decoder: TeamsService.decoder)
     }
     
@@ -52,7 +52,7 @@ public final class TeamsServiceMock: Mockable, TeamsServiceable {
     
     public init() {}
     
-    public func getAllTeams<T>(currentPage: Int) async throws -> T where T : Decodable {
+    public func getAllTeams<T: Decodable>(currentPage: Int) async throws -> T {
         loadJSON(filename: "top_rated_response", type: T.self)
     }
     
@@ -64,7 +64,7 @@ public final class TeamsServiceMock: Mockable, TeamsServiceable {
         loadJSON(filename: "top_rated_response", type: T.self)
     }
     
-    public func getTeamBySeasonID<T>(_ seasonID: Int) async throws -> T where T : Decodable {
+    public func getTeamBySeasonID<T: Decodable>(_ seasonID: Int) async throws -> T {
         loadJSON(filename: "top_rated_response", type: T.self)
     }
     

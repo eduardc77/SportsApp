@@ -30,7 +30,7 @@ public struct LeaguesService: APIClient, LeaguesServiceable {
         self.session = session
     }
     
-    public func getAllLeagues<T>(currentPage: Int) async throws -> T where T : Decodable {
+    public func getAllLeagues<T: Decodable>(currentPage: Int) async throws -> T {
         try await asyncFetchRequest(Football.Leagues.allLeagues(page: currentPage), in: environment, decoder: LeaguesService.decoder)
     }
     
@@ -59,7 +59,7 @@ public final class LeaguesServiceMock: Mockable, LeaguesServiceable {
     
     public init() {}
     
-    public func getAllLeagues<T>(currentPage: Int) async throws -> T where T : Decodable {
+    public func getAllLeagues<T: Decodable>(currentPage: Int) async throws -> T {
         loadJSON(filename: "top_rated_response", type: T.self)
     }
     
@@ -71,7 +71,7 @@ public final class LeaguesServiceMock: Mockable, LeaguesServiceable {
         loadJSON(filename: "top_rated_response", type: T.self)
     }
     
-    public func getLeagueByFixtureDate<T>(date: String) async throws -> T where T : Decodable {
+    public func getLeagueByFixtureDate<T: Decodable>(date: String) async throws -> T {
         loadJSON(filename: "top_rated_response", type: T.self)
     }
     

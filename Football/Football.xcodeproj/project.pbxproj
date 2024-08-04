@@ -68,6 +68,14 @@
 		88BDD49F2C598A1A009B9C34 /* View+Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BDD49B2C598A1A009B9C34 /* View+Spacing.swift */; };
 		88BDD4A12C598B1E009B9C34 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BDD4A02C598B1E009B9C34 /* SettingsCoordinator.swift */; };
 		88BDD4A32C598F58009B9C34 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 88BDD4A22C598F58009B9C34 /* Network */; };
+		DD5EE1162C6004E300FB03D9 /* StageGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5EE1122C6004E300FB03D9 /* StageGridItem.swift */; };
+		DD5EE1172C6004E300FB03D9 /* StagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5EE1142C6004E300FB03D9 /* StagesView.swift */; };
+		DD5EE1182C6004E300FB03D9 /* StagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5EE1152C6004E300FB03D9 /* StagesViewModel.swift */; };
+		DD5EE11A2C60135000FB03D9 /* StagesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5EE1192C60135000FB03D9 /* StagesCoordinator.swift */; };
+		DD5EE1212C601BD700FB03D9 /* SeasonsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5EE11C2C601BD700FB03D9 /* SeasonsViewModel.swift */; };
+		DD5EE1222C601BD700FB03D9 /* SeasonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5EE11D2C601BD700FB03D9 /* SeasonsView.swift */; };
+		DD5EE1232C601BD700FB03D9 /* SeasonGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5EE11E2C601BD700FB03D9 /* SeasonGridItem.swift */; };
+		DD5EE1242C601BD700FB03D9 /* SeasonsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5EE1202C601BD700FB03D9 /* SeasonsCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -153,6 +161,14 @@
 		88BDD4992C598A1A009B9C34 /* Color+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
 		88BDD49B2C598A1A009B9C34 /* View+Spacing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+Spacing.swift"; sourceTree = "<group>"; };
 		88BDD4A02C598B1E009B9C34 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
+		DD5EE1122C6004E300FB03D9 /* StageGridItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StageGridItem.swift; sourceTree = "<group>"; };
+		DD5EE1142C6004E300FB03D9 /* StagesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StagesView.swift; sourceTree = "<group>"; };
+		DD5EE1152C6004E300FB03D9 /* StagesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StagesViewModel.swift; sourceTree = "<group>"; };
+		DD5EE1192C60135000FB03D9 /* StagesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagesCoordinator.swift; sourceTree = "<group>"; };
+		DD5EE11C2C601BD700FB03D9 /* SeasonsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeasonsViewModel.swift; sourceTree = "<group>"; };
+		DD5EE11D2C601BD700FB03D9 /* SeasonsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeasonsView.swift; sourceTree = "<group>"; };
+		DD5EE11E2C601BD700FB03D9 /* SeasonGridItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeasonGridItem.swift; sourceTree = "<group>"; };
+		DD5EE1202C601BD700FB03D9 /* SeasonsCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeasonsCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,14 +259,17 @@
 		88BDD3FA2C597F58009B9C34 /* Football */ = {
 			isa = PBXGroup;
 			children = (
+				88BDD42E2C59827D009B9C34 /* Navigation */,
+				88BDD4372C5982C9009B9C34 /* Onboarding */,
 				88BDD4972C5989A3009B9C34 /* Account */,
+				88BDD4412C5982DA009B9C34 /* Leagues */,
+				DD5EE11B2C601BBE00FB03D9 /* Seasons */,
+				DD5EE1112C6003EF00FB03D9 /* Stages */,
+				88BDD44D2C5982DF009B9C34 /* Teams */,
+				88542BDD2C5AF06C00A9C319 /* Squads */,
+				8840DDFD2C5AD5E900A6893C /* Players */,
 				88BDD46E2C5984C3009B9C34 /* Settings */,
 				88BDD4532C59833C009B9C34 /* General */,
-				88BDD4412C5982DA009B9C34 /* Leagues */,
-				88BDD44D2C5982DF009B9C34 /* Teams */,
-				8840DDFD2C5AD5E900A6893C /* Players */,
-				88BDD4372C5982C9009B9C34 /* Onboarding */,
-				88BDD42E2C59827D009B9C34 /* Navigation */,
 				88BDD3FB2C597F58009B9C34 /* FootballApp.swift */,
 				88BDD3FD2C597F58009B9C34 /* ContentView.swift */,
 				88BDD4012C597F59009B9C34 /* Football.entitlements */,
@@ -345,7 +364,6 @@
 		88BDD44D2C5982DF009B9C34 /* Teams */ = {
 			isa = PBXGroup;
 			children = (
-				88542BDD2C5AF06C00A9C319 /* Squads */,
 				88BDD4482C5982DF009B9C34 /* Subviews */,
 				88BDD4492C5982DF009B9C34 /* TeamsCoordinator.swift */,
 				88BDD44A2C5982DF009B9C34 /* TeamsView.swift */,
@@ -500,6 +518,44 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		DD5EE1112C6003EF00FB03D9 /* Stages */ = {
+			isa = PBXGroup;
+			children = (
+				DD5EE1192C60135000FB03D9 /* StagesCoordinator.swift */,
+				DD5EE1142C6004E300FB03D9 /* StagesView.swift */,
+				DD5EE1152C6004E300FB03D9 /* StagesViewModel.swift */,
+				DD5EE1132C6004E300FB03D9 /* Subviews */,
+			);
+			path = Stages;
+			sourceTree = "<group>";
+		};
+		DD5EE1132C6004E300FB03D9 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				DD5EE1122C6004E300FB03D9 /* StageGridItem.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		DD5EE11B2C601BBE00FB03D9 /* Seasons */ = {
+			isa = PBXGroup;
+			children = (
+				DD5EE1202C601BD700FB03D9 /* SeasonsCoordinator.swift */,
+				DD5EE11D2C601BD700FB03D9 /* SeasonsView.swift */,
+				DD5EE11C2C601BD700FB03D9 /* SeasonsViewModel.swift */,
+				DD5EE11F2C601BD700FB03D9 /* Subviews */,
+			);
+			path = Seasons;
+			sourceTree = "<group>";
+		};
+		DD5EE11F2C601BD700FB03D9 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				DD5EE11E2C601BD700FB03D9 /* SeasonGridItem.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -640,6 +696,9 @@
 				88BDD4332C59827D009B9C34 /* NavigationBarModifier.swift in Sources */,
 				88BDD46F2C5984C3009B9C34 /* AboutFootballApp.swift in Sources */,
 				88BDD4842C598680009B9C34 /* NavigationButton.swift in Sources */,
+				DD5EE1212C601BD700FB03D9 /* SeasonsViewModel.swift in Sources */,
+				DD5EE1182C6004E300FB03D9 /* StagesViewModel.swift in Sources */,
+				DD5EE1172C6004E300FB03D9 /* StagesView.swift in Sources */,
 				88BDD3FE2C597F58009B9C34 /* ContentView.swift in Sources */,
 				88BDD4452C5982DA009B9C34 /* LeaguesViewModel.swift in Sources */,
 				88BDD48C2C598707009B9C34 /* ShimmerModifier.swift in Sources */,
@@ -647,9 +706,12 @@
 				88BDD43A2C5982C9009B9C34 /* OnboardingView.swift in Sources */,
 				88BDD4512C5982DF009B9C34 /* TeamsViewModel.swift in Sources */,
 				88BDD4442C5982DA009B9C34 /* LeaguesView.swift in Sources */,
+				DD5EE1222C601BD700FB03D9 /* SeasonsView.swift in Sources */,
 				88542BE62C5AF09000A9C319 /* SquadView.swift in Sources */,
 				88BDD3FC2C597F58009B9C34 /* FootballApp.swift in Sources */,
 				88BDD47A2C598671009B9C34 /* AsyncImageView.swift in Sources */,
+				DD5EE1242C601BD700FB03D9 /* SeasonsCoordinator.swift in Sources */,
+				DD5EE1162C6004E300FB03D9 /* StageGridItem.swift in Sources */,
 				88BDD4822C598680009B9C34 /* AsyncButton.swift in Sources */,
 				88542BE42C5AF09000A9C319 /* SquadViewModel.swift in Sources */,
 				88BDD4752C5984C3009B9C34 /* FeedbackView.swift in Sources */,
@@ -671,7 +733,9 @@
 				88BDD44E2C5982DF009B9C34 /* TeamGridItem.swift in Sources */,
 				8840DE032C5AD6A300A6893C /* PlayersView.swift in Sources */,
 				8840DE042C5AD6A300A6893C /* PlayersViewModel.swift in Sources */,
+				DD5EE1232C601BD700FB03D9 /* SeasonGridItem.swift in Sources */,
 				88BDD4582C598351009B9C34 /* Array+Utilities.swift in Sources */,
+				DD5EE11A2C60135000FB03D9 /* StagesCoordinator.swift in Sources */,
 				88BDD42F2C59827D009B9C34 /* AppScreen.swift in Sources */,
 				88BDD4732C5984C3009B9C34 /* SettingsLabel.swift in Sources */,
 				88BDD4422C5982DA009B9C34 /* LeagueGridItem.swift in Sources */,

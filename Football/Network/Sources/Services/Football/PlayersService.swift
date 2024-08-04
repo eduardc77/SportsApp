@@ -11,7 +11,7 @@ public protocol PlayersServiceable {
 }
 
 public struct PlayersService: APIClient, PlayersServiceable {
-
+    
     public var environment: Football.Environment
     
     public var session: URLSession
@@ -38,7 +38,7 @@ public struct PlayersService: APIClient, PlayersServiceable {
     public func getPlayersByCountryID<T: Decodable>(_ countryID: Int) async throws -> T {
         try await asyncFetchRequest(Football.Players.playersByCountryID(countryID), in: environment, decoder: PlayersService.decoder)
     }
-
+    
     public func getPlayersSearch<T: Decodable>(by query: String) async throws -> T {
         try await asyncFetchRequest(Football.Players.playersSearch(query: query), in: environment, decoder: PlayersService.decoder)
     }
@@ -49,7 +49,7 @@ public struct PlayersService: APIClient, PlayersServiceable {
 }
 
 public final class PlayersServiceMock: Mockable, PlayersServiceable {
-
+    
     public init() {}
     
     public func getAllPlayers<T: Decodable>(currentPage: Int) async throws -> T {

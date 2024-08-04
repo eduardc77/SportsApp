@@ -36,15 +36,15 @@ public extension Football.Leagues {
         switch self {
         case .allLeagues(let page):
             return ["page": "\(page)"]
-        case .leagueByID(let id):
+        case .leagueByID:
             return nil
         case .leagueLive:
             return nil
-        case .leagueByFixtureDate(let date):
+        case .leagueByFixtureDate:
             return nil
-        case .leagueByCountryID(let countryID):
+        case .leagueByCountryID:
             return nil
-        case .leaguesSearch(let query):
+        case .leaguesSearch:
             return nil
         }
     }
