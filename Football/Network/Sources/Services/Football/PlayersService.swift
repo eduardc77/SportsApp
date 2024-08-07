@@ -64,10 +64,6 @@ public final class PlayersServiceMock: Mockable, PlayersServiceable {
         loadJSON(filename: "top_rated_response", type: T.self)
     }
     
-    public func getLeagueBySeasonID<T: Decodable>(_ seasonID: Int) async throws -> T {
-        loadJSON(filename: "top_rated_response", type: T.self)
-    }
-    
     public func getPlayersSearch<T: Decodable>(by query: String) async throws -> T {
         loadJSON(filename: "top_rated_response", type: T.self)
     }

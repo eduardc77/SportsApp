@@ -12,6 +12,7 @@ enum AppScreen: Codable, Hashable, Identifiable, CaseIterable {
     case fixtures
     case teams
     case players
+    case coaches
     case settings
     
     var id: AppScreen { self }
@@ -33,6 +34,8 @@ extension AppScreen {
             Label("Teams", systemImage: "soccerball")
         case .players:
             Label("Players", systemImage: "figure.soccer")
+        case .coaches:
+            Label("Coaches", systemImage: "figure.stairs")
         case .settings:
             Label("Settings", systemImage: "gearshape.fill")
         }
@@ -53,6 +56,8 @@ extension AppScreen {
             TeamsCoordinator()
         case .players:
             PlayersCoordinator()
+        case .coaches:
+            CoachesCoordinator()
         case .settings:
             SettingsCoordinator()
         }

@@ -69,14 +69,20 @@ private extension StagesView {
     var gridView: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
             ForEach(model.data, id: \.id) { stage in
-                Button {
-                    if let rounds = stage.rounds, !rounds.isEmpty {
-                        router.push(rounds)
-                    } else {
-                        router.push(stage.fixtures)
-                    }
-                } label: {
+                VStack {
                     StageGridItem(item: stage)
+                    
+                    CTAButton(title: "Rounds/Fixtures") {
+                        if let rounds = stage.rounds, !rounds.isEmpty {
+                            router.push(rounds)
+                        } else {
+                            router.push(stage.fixtures)
+                        }
+                    }
+                    
+                    CTAButton(title: "Top Scorers") {
+                        router.push(TopScorerDestination.stage(id: stage.id))
+                    }
                 }
             }
             

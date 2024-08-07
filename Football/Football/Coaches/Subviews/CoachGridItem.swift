@@ -1,16 +1,16 @@
 //
-//  PlayerGridItem.swift
+//  CoachGridItem.swift
 //  FootballApp
 //
 
 import SwiftUI
 import Network
 
-struct PlayerGridItem: View {
-    let item: Player
+struct CoachGridItem: View {
+    let item: Coach
     @State var isEmpty = false
     
-    init(item: Player) {
+    init(item: Coach) {
         self.item = item
     }
     

@@ -76,6 +76,13 @@
 		DD5EE1222C601BD700FB03D9 /* SeasonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5EE11D2C601BD700FB03D9 /* SeasonsView.swift */; };
 		DD5EE1232C601BD700FB03D9 /* SeasonGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5EE11E2C601BD700FB03D9 /* SeasonGridItem.swift */; };
 		DD5EE1242C601BD700FB03D9 /* SeasonsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5EE1202C601BD700FB03D9 /* SeasonsCoordinator.swift */; };
+		DDDF1EFF2C636C5C00E4D1DE /* TopScorerGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDF1EFA2C636C5C00E4D1DE /* TopScorerGridItem.swift */; };
+		DDDF1F002C636C5C00E4D1DE /* TopScorersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDF1EFC2C636C5C00E4D1DE /* TopScorersView.swift */; };
+		DDDF1F012C636C5C00E4D1DE /* TopScorersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDF1EFD2C636C5C00E4D1DE /* TopScorersViewModel.swift */; };
+		DDDF1F082C638D6000E4D1DE /* CoachGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDF1F022C638D5F00E4D1DE /* CoachGridItem.swift */; };
+		DDDF1F092C638D6000E4D1DE /* CoachesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDF1F042C638D5F00E4D1DE /* CoachesCoordinator.swift */; };
+		DDDF1F0A2C638D6000E4D1DE /* CoachesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDF1F052C638D5F00E4D1DE /* CoachesView.swift */; };
+		DDDF1F0B2C638D6000E4D1DE /* CoachesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDF1F062C638D5F00E4D1DE /* CoachesViewModel.swift */; };
 		DDEFA1AD2C609005008661B3 /* FixtureGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEFA1A72C609005008661B3 /* FixtureGridItem.swift */; };
 		DDEFA1AE2C609005008661B3 /* FixturesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEFA1A92C609005008661B3 /* FixturesCoordinator.swift */; };
 		DDEFA1AF2C609005008661B3 /* FixturesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEFA1AA2C609005008661B3 /* FixturesView.swift */; };
@@ -176,6 +183,13 @@
 		DD5EE11D2C601BD700FB03D9 /* SeasonsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeasonsView.swift; sourceTree = "<group>"; };
 		DD5EE11E2C601BD700FB03D9 /* SeasonGridItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeasonGridItem.swift; sourceTree = "<group>"; };
 		DD5EE1202C601BD700FB03D9 /* SeasonsCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeasonsCoordinator.swift; sourceTree = "<group>"; };
+		DDDF1EFA2C636C5C00E4D1DE /* TopScorerGridItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopScorerGridItem.swift; sourceTree = "<group>"; };
+		DDDF1EFC2C636C5C00E4D1DE /* TopScorersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopScorersView.swift; sourceTree = "<group>"; };
+		DDDF1EFD2C636C5C00E4D1DE /* TopScorersViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopScorersViewModel.swift; sourceTree = "<group>"; };
+		DDDF1F022C638D5F00E4D1DE /* CoachGridItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachGridItem.swift; sourceTree = "<group>"; };
+		DDDF1F042C638D5F00E4D1DE /* CoachesCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachesCoordinator.swift; sourceTree = "<group>"; };
+		DDDF1F052C638D5F00E4D1DE /* CoachesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachesView.swift; sourceTree = "<group>"; };
+		DDDF1F062C638D5F00E4D1DE /* CoachesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachesViewModel.swift; sourceTree = "<group>"; };
 		DDEFA1A72C609005008661B3 /* FixtureGridItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FixtureGridItem.swift; sourceTree = "<group>"; };
 		DDEFA1A92C609005008661B3 /* FixturesCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FixturesCoordinator.swift; sourceTree = "<group>"; };
 		DDEFA1AA2C609005008661B3 /* FixturesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FixturesView.swift; sourceTree = "<group>"; };
@@ -279,11 +293,13 @@
 				88BDD4412C5982DA009B9C34 /* Leagues */,
 				DD5EE11B2C601BBE00FB03D9 /* Seasons */,
 				DD5EE1112C6003EF00FB03D9 /* Stages */,
+				DDDF1EFE2C636C5C00E4D1DE /* TopScorers */,
 				DDEFA1B52C60A784008661B3 /* Rounds */,
 				DDEFA1AC2C609005008661B3 /* Fixtures */,
 				88BDD44D2C5982DF009B9C34 /* Teams */,
 				88542BDD2C5AF06C00A9C319 /* Squads */,
 				8840DDFD2C5AD5E900A6893C /* Players */,
+				DDDF1F072C638D5F00E4D1DE /* Coaches */,
 				88BDD46E2C5984C3009B9C34 /* Settings */,
 				88BDD4532C59833C009B9C34 /* General */,
 				88BDD3FB2C597F58009B9C34 /* FootballApp.swift */,
@@ -572,6 +588,43 @@
 			path = Subviews;
 			sourceTree = "<group>";
 		};
+		DDDF1EFB2C636C5C00E4D1DE /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				DDDF1EFA2C636C5C00E4D1DE /* TopScorerGridItem.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		DDDF1EFE2C636C5C00E4D1DE /* TopScorers */ = {
+			isa = PBXGroup;
+			children = (
+				DDDF1EFB2C636C5C00E4D1DE /* Subviews */,
+				DDDF1EFC2C636C5C00E4D1DE /* TopScorersView.swift */,
+				DDDF1EFD2C636C5C00E4D1DE /* TopScorersViewModel.swift */,
+			);
+			path = TopScorers;
+			sourceTree = "<group>";
+		};
+		DDDF1F032C638D5F00E4D1DE /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				DDDF1F022C638D5F00E4D1DE /* CoachGridItem.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		DDDF1F072C638D5F00E4D1DE /* Coaches */ = {
+			isa = PBXGroup;
+			children = (
+				DDDF1F032C638D5F00E4D1DE /* Subviews */,
+				DDDF1F042C638D5F00E4D1DE /* CoachesCoordinator.swift */,
+				DDDF1F052C638D5F00E4D1DE /* CoachesView.swift */,
+				DDDF1F062C638D5F00E4D1DE /* CoachesViewModel.swift */,
+			);
+			path = Coaches;
+			sourceTree = "<group>";
+		};
 		DDEFA1A82C609005008661B3 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
@@ -750,8 +803,10 @@
 				88BDD4332C59827D009B9C34 /* NavigationBarModifier.swift in Sources */,
 				88BDD46F2C5984C3009B9C34 /* AboutFootballApp.swift in Sources */,
 				88BDD4842C598680009B9C34 /* NavigationButton.swift in Sources */,
+				DDDF1F012C636C5C00E4D1DE /* TopScorersViewModel.swift in Sources */,
 				DD5EE1212C601BD700FB03D9 /* SeasonsViewModel.swift in Sources */,
 				DD5EE1182C6004E300FB03D9 /* StagesViewModel.swift in Sources */,
+				DDDF1EFF2C636C5C00E4D1DE /* TopScorerGridItem.swift in Sources */,
 				DD5EE1172C6004E300FB03D9 /* StagesView.swift in Sources */,
 				88BDD3FE2C597F58009B9C34 /* ContentView.swift in Sources */,
 				88BDD4452C5982DA009B9C34 /* LeaguesViewModel.swift in Sources */,
@@ -761,6 +816,7 @@
 				DDEFA1B02C609005008661B3 /* FixturesViewModel.swift in Sources */,
 				88BDD43A2C5982C9009B9C34 /* OnboardingView.swift in Sources */,
 				88BDD4512C5982DF009B9C34 /* TeamsViewModel.swift in Sources */,
+				DDDF1F0A2C638D6000E4D1DE /* CoachesView.swift in Sources */,
 				88BDD4442C5982DA009B9C34 /* LeaguesView.swift in Sources */,
 				DD5EE1222C601BD700FB03D9 /* SeasonsView.swift in Sources */,
 				88542BE62C5AF09000A9C319 /* SquadView.swift in Sources */,
@@ -769,13 +825,16 @@
 				DD5EE1242C601BD700FB03D9 /* SeasonsCoordinator.swift in Sources */,
 				DD5EE1162C6004E300FB03D9 /* StageGridItem.swift in Sources */,
 				88BDD4822C598680009B9C34 /* AsyncButton.swift in Sources */,
+				DDDF1F0B2C638D6000E4D1DE /* CoachesViewModel.swift in Sources */,
 				88542BE42C5AF09000A9C319 /* SquadViewModel.swift in Sources */,
 				88BDD4752C5984C3009B9C34 /* FeedbackView.swift in Sources */,
 				DDEFA1AF2C609005008661B3 /* FixturesView.swift in Sources */,
 				88542BE32C5AF09000A9C319 /* SquadGridItem.swift in Sources */,
 				88BDD4722C5984C3009B9C34 /* PlaceholderText.swift in Sources */,
 				88BDD4432C5982DA009B9C34 /* LeaguesCoordinator.swift in Sources */,
+				DDDF1F082C638D6000E4D1DE /* CoachGridItem.swift in Sources */,
 				88BDD4712C5984C3009B9C34 /* SettingsOption.swift in Sources */,
+				DDDF1F092C638D6000E4D1DE /* CoachesCoordinator.swift in Sources */,
 				8840DE062C5AD6A300A6893C /* PlayersCoordinator.swift in Sources */,
 				88BDD4602C59835C009B9C34 /* ViewStateProtocol.swift in Sources */,
 				DDEFA1B62C60A784008661B3 /* RoundGridItem.swift in Sources */,
@@ -787,6 +846,7 @@
 				88BDD4302C59827D009B9C34 /* AppTabRouter.swift in Sources */,
 				88BDD45F2C59835C009B9C34 /* ViewState.swift in Sources */,
 				88BDD4762C5984C3009B9C34 /* SettingsView.swift in Sources */,
+				DDDF1F002C636C5C00E4D1DE /* TopScorersView.swift in Sources */,
 				88BDD45E2C59835C009B9C34 /* BaseViewModel.swift in Sources */,
 				88BDD4872C59868E009B9C34 /* FooterLoadingView.swift in Sources */,
 				88BDD44E2C5982DF009B9C34 /* TeamGridItem.swift in Sources */,

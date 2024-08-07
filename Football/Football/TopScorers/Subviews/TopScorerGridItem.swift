@@ -1,38 +1,38 @@
 //
-//  PlayerGridItem.swift
+//  TopScorerGridItem.swift
 //  FootballApp
 //
 
 import SwiftUI
 import Network
 
-struct PlayerGridItem: View {
-    let item: Player
-    @State var isEmpty = false
-    
-    init(item: Player) {
-        self.item = item
-    }
-    
+struct TopScorerGridItem: View {
+    let item: TopScorer
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            if let imageURL = URL(string: item.imagePath ?? "") {
+            if let imageURL = URL(string: item.player?.imagePath ?? "") {
                 AsyncImageView(url: imageURL, size: .custom(height: 120), contentMode: .fit)
                     .frame(maxWidth: .infinity, maxHeight: 120)
                     .padding(.vertical)
             } else {
-                Color.secondary.frame(height: 120)
+                ZStack {
+                    Color.secondary.frame(height: 120)
+                    Image(systemName: "figure.soccer")
+                        .foregroundStyle(.white)
+                        .font(.largeTitle)
+                }
             }
             
             VStack(alignment: .leading, spacing: .p8) {
-                Text(item.firstname ?? "")
+                Text(item.player?.name ?? "")
                     .lineLimit(1)
                     .font(.callout.weight(.bold))
                     .minimumScaleFactor(0.3)
                     .foregroundStyle(.primary)
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                Text(item.lastname ?? "")
+                Text(item.participant?.name ?? "")
                     .lineLimit(5)
                     .font(.callout.weight(.semibold))
                     .multilineTextAlignment(.leading)
@@ -40,9 +40,16 @@ struct PlayerGridItem: View {
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity, alignment: .leading)
 
+                Spacer()
                 Divider().padding(.horizontal, -15)
                 
-                Text(item.gender ?? "")
+                Text("Total: \(item.total ?? 0)")
+                    .lineLimit(1)
+                    .font(.footnote.weight(.semibold))
+                    .foregroundStyle(Color.secondary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                Text("Position: \(item.position ?? 0)")
                     .lineLimit(1)
                     .font(.footnote.weight(.semibold))
                     .foregroundStyle(Color.secondary)

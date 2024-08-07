@@ -22,10 +22,21 @@ struct LeaguesCoordinator: View {
                         }
                     case let seasonID as Int:
                         StagesView(model: StagesViewModel(seasonID: seasonID))
+                        
+                    case let topScorerDestination as TopScorerDestination:
+                        switch topScorerDestination {
+                        case .season(let seasonID):
+                            TopScorersView(model: TopScorerViewModel(seasonID: seasonID))
+                        case .stage(let stageID):
+                            TopScorersView(model: TopScorerViewModel(stageID: stageID))
+                        }
+                        
                     case let rounds as [Round]:
                         if !rounds.isEmpty {
                             RoundsView(model: RoundsViewModel(data: rounds))
                         }
+                    case let stageID as Int:
+                        TopScorersView(model: TopScorerViewModel(stageID: stageID))
                     case let fixtures as [Fixture]:
                         if !fixtures.isEmpty {
                             FixturesView(model: FixturesViewModel(data: fixtures))

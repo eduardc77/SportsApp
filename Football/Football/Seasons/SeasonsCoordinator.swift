@@ -18,6 +18,15 @@ struct SeasonsCoordinator: View {
                     switch destination {
                     case let seasonID as Int:
                         StagesView(model: StagesViewModel(seasonID: seasonID))
+                        
+                    case let topScorerDestination as TopScorerDestination:
+                        switch topScorerDestination {
+                        case .season(let seasonID):
+                            TopScorersView(model: TopScorerViewModel(seasonID: seasonID))
+                        case .stage(let stageID):
+                            TopScorersView(model: TopScorerViewModel(stageID: stageID))
+                        }
+
                     case let rounds as [Round]:
                         RoundsView(model: RoundsViewModel(data: rounds))
                     default:
@@ -35,4 +44,9 @@ struct SeasonsCoordinator: View {
 
 #Preview {
     LeaguesCoordinator()
+}
+
+enum TopScorerDestination: Hashable {
+    case season(id: Int)
+    case stage(id: Int)
 }

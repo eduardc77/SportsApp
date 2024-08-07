@@ -1,28 +1,22 @@
 //
-//  SeasonsView.swift
+//  TopScorersView.swift
 //  FootballApp
 //
 
 import SwiftUI
 
-struct SeasonsView: View {
-    @State private var model: SeasonsViewModel
+struct TopScorersView: View {
+    @State var model = TopScorerViewModel()
     
     @Environment(ViewRouter.self) private var router
     @EnvironmentObject private var tabCoordinator: AppTabRouter
     @Environment(ModalScreenRouter.self) private var modalRouter
     
-    init(model: SeasonsViewModel = SeasonsViewModel()) {
-        self.model = model
-    }
-    
     var body: some View {
         baseView
-            .navigationBar(title: "Seasons")
+            .navigationBar(title: "Top Scorers")
             .refreshable {
-                Task {
-                    await model.refresh()
-                }
+                await model.refresh()
             }
     }
     
@@ -45,18 +39,14 @@ struct SeasonsView: View {
             .onFirstAppear {
                 modalRouter.presentAlert(title: "Error", message: error) {
                     Button("OK") {
-//                        model.changeStateToEmpty()
+                        // model.changeStateToEmpty()
                     }
                 }
             }
         case .initial:
             ProgressView()
                 .task {
-                    guard model.data.isEmpty else {
-                        model.changeState(.finished)
-                        return
-                    }
-                    await model.fetchAllData()
+                    await model.fetchDataByID()
                 }
         }
     }
@@ -64,21 +54,15 @@ struct SeasonsView: View {
 
 // MARK: - Subviews
 
-private extension SeasonsView {
+private extension TopScorersView {
     
     var gridView: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
-            ForEach(model.data, id: \.id) { season in
-                VStack {
-                    SeasonGridItem(item: season)
+            ForEach(model.data, id: \.id) { topScorer in
+                SwiftUI.Button {
                     
-                    CTAButton(title: "Stages") {
-                        router.push(season.id)
-                    }
-                    
-                    CTAButton(title: "Top Scorers") {
-                        router.push(TopScorerDestination.season(id: season.id))
-                    }
+                } label: {
+                    TopScorerGridItem(item: topScorer)
                 }
             }
             
@@ -95,6 +79,6 @@ private extension SeasonsView {
 
 #Preview {
     NavigationStack {
-        SeasonsView()
+        TopScorersView()
     }
 }

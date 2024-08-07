@@ -67,6 +67,12 @@ public extension APIClient {
         switch httpResponse.statusCode {
         case 200...299:
             do {
+//                if let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers),
+//                   let jsonData = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted) {
+//                    print(String(decoding: jsonData, as: UTF8.self))
+//                } else {
+//                    print("json data malformed")
+//                }
                 return try decoder.decode(T.self, from: data)
             } catch {
                 throw APIError.decodingDataError

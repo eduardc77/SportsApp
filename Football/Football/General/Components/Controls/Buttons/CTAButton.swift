@@ -26,6 +26,7 @@ public struct CTAButton: View {
                 Image(systemName: "arrow.right.circle")
                     .imageScale(.large)
             }
+            .frame(maxWidth: .infinity)
             .padding(.horizontal, 16)
             .padding(.vertical, 10)
             .background(backgroundColor.clipShape(Capsule()))

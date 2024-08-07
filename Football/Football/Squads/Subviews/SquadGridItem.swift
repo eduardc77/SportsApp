@@ -50,6 +50,7 @@ struct SquadGridItem: View {
             }
             .padding()
         }
-        .background(.background.secondary, in: .rect(cornerRadius: 8))
+        .background(.background.secondary)
+        .clipShape(.rect(cornerRadius: 8))
     }
 }

@@ -1,28 +1,22 @@
 //
-//  SeasonsView.swift
+//  CoachesView.swift
 //  FootballApp
 //
 
 import SwiftUI
 
-struct SeasonsView: View {
-    @State private var model: SeasonsViewModel
+struct CoachesView: View {
+    @State var model: CoachesViewModel
     
     @Environment(ViewRouter.self) private var router
     @EnvironmentObject private var tabCoordinator: AppTabRouter
     @Environment(ModalScreenRouter.self) private var modalRouter
     
-    init(model: SeasonsViewModel = SeasonsViewModel()) {
-        self.model = model
-    }
-    
     var body: some View {
         baseView
-            .navigationBar(title: "Seasons")
+            .navigationBar(title: "Coaches")
             .refreshable {
-                Task {
-                    await model.refresh()
-                }
+                await model.refresh()
             }
     }
     
@@ -44,8 +38,8 @@ struct SeasonsView: View {
             }
             .onFirstAppear {
                 modalRouter.presentAlert(title: "Error", message: error) {
-                    Button("OK") {
-//                        model.changeStateToEmpty()
+                    Button("Ok") {
+                        //                        model.changeStateToEmpty()
                     }
                 }
             }
@@ -64,21 +58,15 @@ struct SeasonsView: View {
 
 // MARK: - Subviews
 
-private extension SeasonsView {
+private extension CoachesView {
     
     var gridView: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
-            ForEach(model.data, id: \.id) { season in
-                VStack {
-                    SeasonGridItem(item: season)
+            ForEach(model.data, id: \.id) { coach in
+                Button {
                     
-                    CTAButton(title: "Stages") {
-                        router.push(season.id)
-                    }
-                    
-                    CTAButton(title: "Top Scorers") {
-                        router.push(TopScorerDestination.season(id: season.id))
-                    }
+                } label: {
+                    CoachGridItem(item: coach)
                 }
             }
             
@@ -95,6 +83,6 @@ private extension SeasonsView {
 
 #Preview {
     NavigationStack {
-        SeasonsView()
+        CoachesView(model: CoachesViewModel())
     }
 }

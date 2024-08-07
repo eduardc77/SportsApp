@@ -1,16 +1,16 @@
 //
-//  PlayersViewModel.swift
+//  CoachesViewModel.swift
 //  FootballApp
 //
 
 import Foundation
 import Network
 
-final class PlayersViewModel: BaseViewModel<ViewState> {
-    private let service: PlayersServiceable
+final class CoachesViewModel: BaseViewModel<ViewState> {
+    private let service: CoachesServiceable
     
-    private(set) var responseModel: PlayersResponseModel?
-    private(set) var data = [Player]()
+    private(set) var responseModel: CoachesResponseModel?
+    private(set) var data = [Coach]()
     
     var currentPage: Int {
         (responseModel?.pagination?.currentPage ?? 0) + 1
@@ -20,7 +20,7 @@ final class PlayersViewModel: BaseViewModel<ViewState> {
         responseModel?.pagination?.hasMore ?? false
     }
 
-    init(data: [Player] = [], service: PlayersServiceable = PlayersService()) {
+    init(data: [Coach] = [], service: CoachesServiceable = CoachesService()) {
         self.data = data
         self.service = service
     }
@@ -30,7 +30,7 @@ final class PlayersViewModel: BaseViewModel<ViewState> {
         guard state != .empty else { return }
         
         do {
-            let result: PlayersResponseModel = try await service.getAllPlayers(currentPage: page ?? currentPage)
+            let result: CoachesResponseModel = try await service.getAllCoaches(currentPage: page ?? currentPage)
             
             if currentPage == 1 || data.isEmpty {
                 self.changeState(.loading)
@@ -61,7 +61,7 @@ final class PlayersViewModel: BaseViewModel<ViewState> {
         changeState(.empty)
     }
     
-    private func updateData(with result: PlayersResponseModel) {
+    private func updateData(with result: CoachesResponseModel) {
         data += result.data
     }
 }

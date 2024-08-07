@@ -18,8 +18,17 @@ struct StagesCoordinator: View {
                     switch destination {
                     case let rounds as [Round]:
                         RoundsView(model: RoundsViewModel(data: rounds))
+                        
                     case let fixtures as [Fixture]:
                         FixturesView(model: FixturesViewModel(data: fixtures))
+                        
+                    case let topScorerDestination as TopScorerDestination:
+                        switch topScorerDestination {
+                        case .season(let seasonID):
+                            TopScorersView(model: TopScorerViewModel(seasonID: seasonID))
+                        case .stage(let stageID):
+                            TopScorersView(model: TopScorerViewModel(stageID: stageID))
+                        }
                     default:
                         EmptyView()
                     }

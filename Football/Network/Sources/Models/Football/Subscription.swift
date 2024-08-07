@@ -1,7 +1,7 @@
 
 public struct Subscription: Decodable {
     public let meta: Meta?
-    public let plans: [Plan]?
+    public let plauns: [Plan]?
 }
 
 public struct Plan: Decodable {
