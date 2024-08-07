@@ -1,16 +1,16 @@
 //
-//  StagesViewModel.swift
+//  RoundsView.swift
 //  FootballApp
 //
 
 import Foundation
 import Network
 
-final class StagesViewModel: BaseViewModel<ViewState> {
-    private let service: StagesServiceable
+final class RoundsViewModel: BaseViewModel<ViewState> {
+    private let service: RoundsServiceable
     
-    private(set) var responseModel: StagesResponseModel?
-    private(set) var data: [Stage] = []
+    private(set) var responseModel: RoundsResponseModel?
+    private(set) var data: [Round]
     
     private(set) var seasonID: Int?
     
@@ -22,8 +22,8 @@ final class StagesViewModel: BaseViewModel<ViewState> {
         responseModel?.pagination?.hasMore ?? false
     }
     
-    init(seasonID: Int? = nil, service: StagesServiceable = StagesService()) {
-        self.seasonID = seasonID
+    init(data: [Round] = [], seasonID: Int? = nil, service: RoundsServiceable = RoundsService()) {
+        self.data = data
         self.service = service
     }
     
@@ -32,7 +32,7 @@ final class StagesViewModel: BaseViewModel<ViewState> {
         guard state != .empty else { return }
         
         do {
-            let result: StagesResponseModel = try await service.getAllStages(currentPage: page ?? currentPage)
+            let result: RoundsResponseModel = try await service.getAllRounds(currentPage: page ?? currentPage)
             
             if currentPage == 1 || data.isEmpty {
                 self.changeState(.loading)
@@ -55,7 +55,7 @@ final class StagesViewModel: BaseViewModel<ViewState> {
         guard state != .empty else { return }
         
         do {
-            let result: StagesResponseModel = try await service.getStagesBySeasonID(seasonID)
+            let result: RoundsResponseModel = try await service.getRoundsBySeasonID(seasonID)
             
             if currentPage == 1 || data.isEmpty {
                 self.changeState(.loading)
@@ -73,7 +73,7 @@ final class StagesViewModel: BaseViewModel<ViewState> {
         
         if let seasonID = seasonID {
             await fetchDataBySeasonID(seasonID)
-        } else {
+        } else if data.isEmpty {
             await fetchAllData()
         }
     }
@@ -81,7 +81,7 @@ final class StagesViewModel: BaseViewModel<ViewState> {
     func refresh() async {
         if let seasonID = seasonID {
             await fetchDataBySeasonID(seasonID)
-        } else {
+        } else if data.isEmpty {
             await fetchAllData(page: 1)
         }
     }
@@ -91,7 +91,7 @@ final class StagesViewModel: BaseViewModel<ViewState> {
         changeState(.empty)
     }
     
-    private func updateData(with result: StagesResponseModel) {
+    private func updateData(with result: RoundsResponseModel) {
         data += result.data
     }
 }

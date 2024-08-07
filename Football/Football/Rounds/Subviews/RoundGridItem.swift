@@ -1,13 +1,13 @@
 //
-//  StageGridItem.swift
+//  RoundGridItem.swift
 //  FootballApp
 //
 
 import SwiftUI
 import Network
 
-struct StageGridItem: View {
-    let item: Stage
+struct RoundGridItem: View {
+    let item: Round
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -26,7 +26,7 @@ struct StageGridItem: View {
                     .foregroundStyle(Color.primary)
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity, alignment: .leading)
-          
+      
                 Divider().padding(.horizontal, -15)
                 
                 Text(item.endingAt ?? "")

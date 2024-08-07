@@ -24,7 +24,7 @@ struct SquadGridItem: View {
                 }
             }
             
-            VStack(alignment: .leading, spacing: .xxxSmall) {
+            VStack(alignment: .leading, spacing: .p8) {
                 Text(item.name ?? "")
                     .lineLimit(1)
                     .font(.callout.weight(.bold))
@@ -39,8 +39,8 @@ struct SquadGridItem: View {
                     .foregroundStyle(Color.primary)
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                Spacer()
-                Divider().padding(.horizontal, -10)
+
+                Divider().padding(.horizontal, -15)
                 
                 Text(item.end ?? "")
                     .lineLimit(1)
@@ -48,10 +48,8 @@ struct SquadGridItem: View {
                     .foregroundStyle(Color.secondary)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .padding(10)
+            .padding()
         }
-        .frame(minWidth: 160, minHeight: 280, maxHeight: .infinity)
-        .background(Color(.systemGray6))
-        .clipShape(RoundedRectangle(cornerRadius: 8))
+        .background(.background.secondary, in: .rect(cornerRadius: 8))
     }
 }

@@ -28,7 +28,7 @@ public extension Football.Seasons {
     var queryParams: [String: String]? {
         switch self {
         case .allSeasons(let page):
-            return ["page": "\(page)"]
+            return ["page": "\(page)", "include": "stages; currentStage"]
         case .seasonByID:
             return nil
         case .seasonsByTeamID(_, let page):

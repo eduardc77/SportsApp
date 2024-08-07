@@ -1,13 +1,13 @@
 //
-//  StageGridItem.swift
+//  FixtureGridItem.swift
 //  FootballApp
 //
 
 import SwiftUI
 import Network
 
-struct StageGridItem: View {
-    let item: Stage
+struct FixtureGridItem: View {
+    let item: Fixture
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -19,17 +19,17 @@ struct StageGridItem: View {
                     .foregroundStyle(.primary)
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                Text(item.startingAt ?? "")
+                Text(item.details ?? "")
                     .lineLimit(5)
                     .font(.callout.weight(.semibold))
                     .multilineTextAlignment(.leading)
                     .foregroundStyle(Color.primary)
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity, alignment: .leading)
-          
+
                 Divider().padding(.horizontal, -15)
                 
-                Text(item.endingAt ?? "")
+                Text(item.resultInfo ?? "")
                     .lineLimit(1)
                     .font(.footnote.weight(.semibold))
                     .foregroundStyle(Color.secondary)

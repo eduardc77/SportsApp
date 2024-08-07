@@ -4,37 +4,30 @@
 //
 
 import SwiftUI
-import Network
 
 struct SquadView: View {
-    @State private var model: SquadViewModel
+    @State var model: SquadViewModel
     
     @EnvironmentObject private var router: ViewRouter
     @EnvironmentObject private var tabCoordinator: AppTabRouter
     @EnvironmentObject private var modalRouter: ModalScreenRouter
     
-    init(teamID: Int) {
-        model = SquadViewModel(teamID: teamID)
-    }
-    
     var body: some View {
-        baseView()
+        baseView
             .navigationBar(title: "Team Squad")
             .refreshable {
-                Task {
-                    await model.refresh()
-                }
+                await model.refresh()
             }
     }
     
     @ViewBuilder
-    private func baseView() -> some View {
+    private var baseView: some View {
         switch model.state {
         case .empty:
             Label("No Data", systemImage: "newspaper")
         case .finished:
             ScrollView {
-                squadGrid
+                gridView
             }
         case .loading:
             ProgressView("Loading")
@@ -46,16 +39,14 @@ struct SquadView: View {
             .onFirstAppear {
                 modalRouter.presentAlert(title: "Error", message: error) {
                     Button("OK") {
-                        model.changeStateToEmpty()
+                        //  model.changeStateToEmpty()
                     }
                 }
             }
         case .initial:
             ProgressView()
-                .onAppear {
-                    Task {
-                        await model.fetchTeamSquad()
-                    }
+                .task {
+                    await model.fetchDataByTeamID()
                 }
         }
     }
@@ -65,9 +56,9 @@ struct SquadView: View {
 
 private extension SquadView {
     
-    var squadGrid: some View {
+    var gridView: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
-            ForEach(model.teamSquad, id: \.id) { player in
+            ForEach(model.data, id: \.id) { player in
                 SwiftUI.Button {
                     
                 } label: {
@@ -75,16 +66,14 @@ private extension SquadView {
                 }
             }
             
-            Rectangle()
-                .fill(.clear)
-                .frame(height: 20) // Bottom padding
-                .task {
-                    if model.state != .loading, !model.teamSquad.isEmpty {
+            if model.state != .loading, !model.data.isEmpty, model.hasMoreContent {
+                ProgressView()
+                    .task {
                         await model.loadMoreContent()
                     }
-                }
+            }
         }
-        .padding(10)
+        .padding()
     }
 }
 

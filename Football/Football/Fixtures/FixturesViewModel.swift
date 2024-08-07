@@ -1,16 +1,16 @@
 //
-//  TeamsViewModel.swift
+//  FixturesViewModel.swift
 //  FootballApp
 //
 
 import Foundation
 import Network
 
-final class TeamsViewModel: BaseViewModel<ViewState> {
-    private let service: TeamsServiceable
+final class FixturesViewModel: BaseViewModel<ViewState> {
+    private let service: FixturesServiceable
     
-    private(set) var responseModel: TeamsResponseModel?
-    private(set) var data = [Team]()
+    private(set) var responseModel: FixturesResponseModel?
+    private(set) var data: [Fixture]
     
     var currentPage: Int {
         (responseModel?.pagination?.currentPage ?? 0) + 1
@@ -20,7 +20,7 @@ final class TeamsViewModel: BaseViewModel<ViewState> {
         responseModel?.pagination?.hasMore ?? false
     }
     
-    init(data: [Team] = [], service: TeamsServiceable = TeamsService()) {
+    init(data: [Fixture] = [], service: FixturesServiceable = FixturesService()) {
         self.data = data
         self.service = service
     }
@@ -30,7 +30,7 @@ final class TeamsViewModel: BaseViewModel<ViewState> {
         guard state != .empty else { return }
         
         do {
-            let result: TeamsResponseModel = try await service.getAllTeams(currentPage: page ?? currentPage)
+            let result: FixturesResponseModel = try await service.getAllFixtures(page: page ?? currentPage)
             
             if currentPage == 1 || data.isEmpty {
                 self.changeState(.loading)
@@ -40,6 +40,7 @@ final class TeamsViewModel: BaseViewModel<ViewState> {
             } else {
                 updateData(with: result)
             }
+            
             responseModel = result
             changeState(.finished)
         } catch {
@@ -48,7 +49,7 @@ final class TeamsViewModel: BaseViewModel<ViewState> {
     }
     
     func loadMoreContent() async {
-        guard responseModel?.pagination?.nextPage != nil else { return }
+        guard responseModel?.pagination?.nextPage != nil, hasMoreContent else { return }
         await fetchAllData()
     }
     
@@ -61,7 +62,7 @@ final class TeamsViewModel: BaseViewModel<ViewState> {
         changeState(.empty)
     }
     
-    private func updateData(with result: TeamsResponseModel) {
+    private func updateData(with result: FixturesResponseModel) {
         data += result.data
     }
 }

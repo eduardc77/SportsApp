@@ -15,7 +15,7 @@ public extension View {
 public extension VStack where Content: View {
     init(
         alignment: HorizontalAlignment = .center,
-        spacing: Spacing = .medium,
+        spacing: Spacing = .p12,
         @ViewBuilder content: () -> Content
     ) {
         self.init(
@@ -29,7 +29,7 @@ public extension VStack where Content: View {
 public extension HStack where Content: View {
     init(
         alignment: VerticalAlignment = .center,
-        spacing: Spacing = .medium,
+        spacing: Spacing = .p12,
         @ViewBuilder content: () -> Content
     ) {
         self.init(

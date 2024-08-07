@@ -5,7 +5,6 @@
 
 import SwiftUI
 import StoreKit
-import Network
 
 struct SettingsView: View {
     @EnvironmentObject private var settings: AppSettings

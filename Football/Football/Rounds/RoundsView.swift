@@ -1,28 +1,22 @@
 //
-//  StagesView.swift
+//  RoundsView.swift
 //  FootballApp
 //
 
 import SwiftUI
 
-struct StagesView: View {
-    @State private var model: StagesViewModel
+struct RoundsView: View {
+    @State var model: RoundsViewModel
     
     @EnvironmentObject private var router: ViewRouter
     @EnvironmentObject private var tabCoordinator: AppTabRouter
     @EnvironmentObject private var modalRouter: ModalScreenRouter
     
-    init(model: StagesViewModel = StagesViewModel()) {
-        self.model = model
-    }
-    
     var body: some View {
         baseView
-            .navigationBar(title: "Stages")
+            .navigationBar(title: "Rounds")
             .refreshable {
-                Task {
-                    await model.refresh()
-                }
+                await model.refresh()
             }
     }
     
@@ -52,9 +46,13 @@ struct StagesView: View {
         case .initial:
             ProgressView()
                 .task {
+                    guard model.data.isEmpty else {
+                        model.changeState(.finished)
+                        return
+                    }
                     if let seasonID = model.seasonID {
                         await model.fetchDataBySeasonID(seasonID)
-                    } else {
+                    } else if model.data.isEmpty {
                         await model.fetchAllData()
                     }
                 }
@@ -64,19 +62,15 @@ struct StagesView: View {
 
 // MARK: - Subviews
 
-private extension StagesView {
+private extension RoundsView {
     
     var gridView: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
-            ForEach(model.data, id: \.id) { stage in
+            ForEach(model.data, id: \.id) { round in
                 Button {
-                    if let rounds = stage.rounds, !rounds.isEmpty {
-                        router.push(rounds)
-                    } else {
-                        router.push(stage.fixtures)
-                    }
+                    router.push(round.fixtures)
                 } label: {
-                    StageGridItem(item: stage)
+                    RoundGridItem(item: round)
                 }
             }
             
@@ -93,6 +87,6 @@ private extension StagesView {
 
 #Preview {
     NavigationStack {
-        StagesView()
+        RoundsView(model: RoundsViewModel())
     }
 }

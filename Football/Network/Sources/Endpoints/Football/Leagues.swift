@@ -35,7 +35,7 @@ public extension Football.Leagues {
     var queryParams: [String: String]? {
         switch self {
         case .allLeagues(let page):
-            return ["page": "\(page)"]
+            return ["page": "\(page)", "include": "seasons; currentSeason"]
         case .leagueByID:
             return nil
         case .leagueLive:

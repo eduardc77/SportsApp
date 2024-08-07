@@ -2,8 +2,6 @@
 //  FootballTests.swift
 //  FootballTests
 //
-//  Created by iMac on 30.07.2024.
-//
 
 import XCTest
 

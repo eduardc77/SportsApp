@@ -4,33 +4,30 @@
 //
 
 import SwiftUI
-import Network
 
 struct PlayersView: View {
-    @State private var model = PlayersViewModel()
+    @State var model: PlayersViewModel
     
     @EnvironmentObject private var router: ViewRouter
     @EnvironmentObject private var tabCoordinator: AppTabRouter
     @EnvironmentObject private var modalRouter: ModalScreenRouter
     
     var body: some View {
-        baseView()
+        baseView
             .navigationBar(title: "Players")
             .refreshable {
-                Task {
-                    await model.refresh()
-                }
+                await model.refresh()
             }
     }
     
     @ViewBuilder
-    private func baseView() -> some View {
+    private var baseView: some View {
         switch model.state {
         case .empty:
             Label("No Data", systemImage: "newspaper")
         case .finished:
             ScrollView {
-                playersGrid
+                gridView
             }
         case .loading:
             ProgressView("Loading")
@@ -42,16 +39,18 @@ struct PlayersView: View {
             .onFirstAppear {
                 modalRouter.presentAlert(title: "Error", message: error) {
                     Button("Ok") {
-                        model.changeStateToEmpty()
+                        //                        model.changeStateToEmpty()
                     }
                 }
             }
         case .initial:
             ProgressView()
-                .onAppear {
-                    Task {
-                        await model.fetchAllLeagues()
+                .task {
+                    guard model.data.isEmpty else {
+                        model.changeState(.finished)
+                        return
                     }
+                    await model.fetchAllData()
                 }
         }
     }
@@ -61,31 +60,29 @@ struct PlayersView: View {
 
 private extension PlayersView {
     
-    var playersGrid: some View {
+    var gridView: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
-            ForEach(model.allPlayers, id: \.id) { player in
+            ForEach(model.data, id: \.id) { player in
                 Button {
-                    // router.push(league)
+                    
                 } label: {
                     PlayerGridItem(item: player)
                 }
             }
             
-            Rectangle()
-                .fill(.clear)
-                .frame(height: 20) // Bottom padding
-                .task {
-                    if model.state != .loading, !model.allPlayers.isEmpty {
+            if model.state != .loading, !model.data.isEmpty, model.hasMoreContent {
+                ProgressView()
+                    .task {
                         await model.loadMoreContent()
                     }
-                }
+            }
         }
-        .padding(10)
+        .padding()
     }
 }
 
 #Preview {
     NavigationStack {
-        LeaguesView()
+        PlayersView(model: PlayersViewModel())
     }
 }

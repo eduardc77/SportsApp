@@ -9,6 +9,7 @@ enum AppScreen: Codable, Hashable, Identifiable, CaseIterable {
     case leagues
     case seasons
     case stages
+    case fixtures
     case teams
     case players
     case settings
@@ -26,6 +27,8 @@ extension AppScreen {
             Label("Seasons", systemImage: "calendar")
         case .stages:
             Label("Stages", systemImage: "squares.leading.rectangle")
+        case .fixtures:
+            Label("Fixtures", systemImage: "sportscourt.fill")
         case .teams:
             Label("Teams", systemImage: "soccerball")
         case .players:
@@ -44,6 +47,8 @@ extension AppScreen {
             SeasonsCoordinator()
         case .stages:
             StagesCoordinator()
+        case .fixtures:
+            FixturesCoordinator()
         case .teams:
             TeamsCoordinator()
         case .players:

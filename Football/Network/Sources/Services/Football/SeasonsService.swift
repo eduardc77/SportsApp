@@ -63,4 +63,3 @@ public final class SeasonsServiceMock: Mockable, SeasonsServiceable {
         loadJSON(filename: "top_rated_response", type: T.self)
     }
 }
-

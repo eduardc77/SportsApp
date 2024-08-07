@@ -12,6 +12,9 @@ public struct League: Decodable, Hashable {
     public let lastPlayedAt: String?
     public let category: Int?
     public let hasJerseys: Bool?
+    public let stages: [Stage]?
+    public let seasons: [Season]?
+    public let currentSeason: Season?
 }
 
 public struct LeaguesResponseModel: Decodable {

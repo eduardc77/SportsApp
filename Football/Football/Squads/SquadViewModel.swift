@@ -7,37 +7,42 @@ import Foundation
 import Network
 
 final class SquadViewModel: BaseViewModel<ViewState> {
-    let squadsService: SquadsServiceable
+    private let service: SquadsServiceable
     
-    private(set) var playersResponseModel: PlayersResponseModel?
-    private(set) var teamSquad = [Player]()
+    private(set) var responseModel: PlayersResponseModel?
+    private(set) var data = [Player]()
     
     private(set) var teamID: Int
     
     var currentPage: Int {
-        (playersResponseModel?.pagination.currentPage ?? 0) + 1
+        (responseModel?.pagination?.currentPage ?? 0) + 1
     }
     
-    init(teamID: Int, squadsService: SquadsServiceable = SquadsService()) {
+    var hasMoreContent: Bool {
+        responseModel?.pagination?.hasMore ?? false
+    }
+    
+    init(teamID: Int, service: SquadsServiceable = SquadsService()) {
         self.teamID = teamID
-        self.squadsService = squadsService
+        self.service = service
     }
     
     @MainActor
-    func fetchTeamSquad(page: Int? = nil) async {
+    func fetchDataByTeamID(page: Int? = nil) async {
         guard state != .empty else { return }
         
-        if currentPage == 1 || teamSquad.isEmpty {
-            self.changeState(.loading)
-        }
         do {
-            let result: PlayersResponseModel = try await squadsService.getSquadsByTeamID(teamID, currentPage: page ?? currentPage)
-            if page == 1 {
-                teamSquad = result.data
-            } else {
-                updateTeamSquadData(with: result)
+            let result: PlayersResponseModel = try await service.getSquadsByTeamID(teamID, currentPage: page ?? currentPage)
+            
+            if currentPage == 1 || data.isEmpty {
+                self.changeState(.loading)
             }
-            playersResponseModel = result
+            if page == 1 {
+                data = result.data
+            } else {
+                updateData(with: result)
+            }
+            responseModel = result
             changeState(.finished)
         } catch {
             changeState(.error(error: error.localizedDescription))
@@ -45,12 +50,12 @@ final class SquadViewModel: BaseViewModel<ViewState> {
     }
     
     func loadMoreContent() async {
-        guard playersResponseModel?.pagination.nextPage != nil else { return }
-        await fetchTeamSquad()
+        guard responseModel?.pagination?.nextPage != nil, hasMoreContent else { return }
+        await fetchDataByTeamID()
     }
     
     func refresh() async {
-        await fetchTeamSquad(page: 1)
+        await fetchDataByTeamID(page: 1)
     }
     
     @MainActor
@@ -58,7 +63,7 @@ final class SquadViewModel: BaseViewModel<ViewState> {
         changeState(.empty)
     }
     
-    private func updateTeamSquadData(with result: PlayersResponseModel) {
-        teamSquad += result.data
+    private func updateData(with result: PlayersResponseModel) {
+        data += result.data
     }
 }

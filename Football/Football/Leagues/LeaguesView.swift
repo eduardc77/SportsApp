@@ -4,7 +4,6 @@
 //
 
 import SwiftUI
-import Network
 
 struct LeaguesView: View {
     @State private var model = LeaguesViewModel()
@@ -12,9 +11,9 @@ struct LeaguesView: View {
     @EnvironmentObject private var router: ViewRouter
     @EnvironmentObject private var tabCoordinator: AppTabRouter
     @EnvironmentObject private var modalRouter: ModalScreenRouter
-
+    
     var body: some View {
-        baseView()
+        baseView
             .navigationBar(title: "Leagues")
             .refreshable {
                 Task {
@@ -24,13 +23,13 @@ struct LeaguesView: View {
     }
     
     @ViewBuilder
-    private func baseView() -> some View {
+    private var baseView: some View {
         switch model.state {
         case .empty:
             Label("No Data", systemImage: "newspaper")
         case .finished:
             ScrollView {
-                leaguesGrid
+                gridView
             }
         case .loading:
             ProgressView("Loading")
@@ -42,16 +41,14 @@ struct LeaguesView: View {
             .onFirstAppear {
                 modalRouter.presentAlert(title: "Error", message: error) {
                     Button("Ok") {
-                        model.changeStateToEmpty()
+                        //                        model.changeStateToEmpty()
                     }
                 }
             }
         case .initial:
             ProgressView()
-                .onAppear {
-                    Task {
-                        await model.fetchAllLeagues()
-                    }
+                .task {
+                    await model.fetchAllData()
                 }
         }
     }
@@ -61,26 +58,24 @@ struct LeaguesView: View {
 
 private extension LeaguesView {
     
-    var leaguesGrid: some View {
+    var gridView: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
-            ForEach(model.allLeagues, id: \.id) { league in
+            ForEach(model.data, id: \.id) { league in
                 Button {
-//                    router.push(league)
+                    router.push(league.seasons ?? [])
                 } label: {
                     LeagueGridItem(item: league)
                 }
             }
             
-            Rectangle()
-                .fill(.clear)
-                .frame(height: 20) // Bottom padding
-                .task {
-                    if model.state != .loading, !model.allLeagues.isEmpty {
+            if model.state != .loading, !model.data.isEmpty, model.hasMoreContent {
+                ProgressView()
+                    .task {
                         await model.loadMoreContent()
                     }
-                }
+            }
         }
-        .padding(10)
+        .padding()
     }
 }
 

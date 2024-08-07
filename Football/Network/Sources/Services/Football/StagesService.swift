@@ -5,8 +5,8 @@ public protocol StagesServiceable {
     
     func getAllStages<T: Decodable>(currentPage: Int) async throws -> T
     func getStageByID<T: Decodable>(_ id: Int, currentPage: Int) async throws -> T
-    func getStagesBySeasonID<T: Decodable>(_ seasonID: Int, currentPage: Int) async throws -> T
-    func getStagesSearch<T: Decodable>(by query: String) async throws -> T
+    func getStagesBySeasonID<T: Decodable>(_ seasonID: Int) async throws -> T
+    func getStagesSearch<T: Decodable>(by query: String, currentPage: Int) async throws -> T
 }
 
 public struct StagesService: APIClient, StagesServiceable {
@@ -34,12 +34,12 @@ public struct StagesService: APIClient, StagesServiceable {
         try await asyncFetchRequest(Football.Stages.stageByID(id), in: environment, decoder: StagesService.decoder)
     }
     
-    public func getStagesBySeasonID<T: Decodable>(_ seasonID: Int, currentPage: Int) async throws -> T {
-        try await asyncFetchRequest(Football.Stages.stageBySeasonID(seasonID, page: currentPage), in: environment, decoder: StagesService.decoder)
+    public func getStagesBySeasonID<T: Decodable>(_ seasonID: Int) async throws -> T {
+        try await asyncFetchRequest(Football.Stages.stagesBySeasonID(seasonID), in: environment, decoder: StagesService.decoder)
     }
     
-    public func getStagesSearch<T: Decodable>(by query: String) async throws -> T {
-        try await asyncFetchRequest(Football.Stages.stagesSearch(query: query), in: environment, decoder: StagesService.decoder)
+    public func getStagesSearch<T: Decodable>(by query: String, currentPage: Int) async throws -> T {
+        try await asyncFetchRequest(Football.Stages.stagesSearch(query: query, page: currentPage), in: environment, decoder: StagesService.decoder)
     }
 }
 
@@ -55,12 +55,11 @@ public final class StagesServiceMock: Mockable, StagesServiceable {
         loadJSON(filename: "top_rated_response", type: T.self)
     }
     
-    public func getStagesBySeasonID<T: Decodable>(_ seasonID: Int, currentPage: Int) async throws -> T {
+    public func getStagesBySeasonID<T: Decodable>(_ seasonID: Int) async throws -> T {
         loadJSON(filename: "top_rated_response", type: T.self)
     }
     
-    public func getStagesSearch<T: Decodable>(by query: String) async throws -> T {
+    public func getStagesSearch<T: Decodable>(by query: String, currentPage: Int) async throws -> T {
         loadJSON(filename: "top_rated_response", type: T.self)
     }
 }
-

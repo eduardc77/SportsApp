@@ -2,8 +2,6 @@
 //  SettingsCoordinator.swift
 //  Football
 //
-//  Created by iMac on 30.07.2024.
-//
 
 import SwiftUI
 

@@ -7,37 +7,39 @@ import Foundation
 import Network
 
 final class LeaguesViewModel: BaseViewModel<ViewState> {
-    let leaguesService: LeaguesServiceable
+    private let service: LeaguesServiceable
     
-    @Published private(set) var leaguesResponseModel: LeaguesResponseModel?
-    @Published private(set) var allLeagues = [League]()
+    @Published private(set) var responseModel: LeaguesResponseModel?
+    @Published private(set) var data = [League]()
     
     var currentPage: Int {
-        (leaguesResponseModel?.pagination.currentPage ?? 0) + 1
+        (responseModel?.pagination.currentPage ?? 0) + 1
     }
     
-    //Use dependency injection not assigning in the initializer
-    init(leaguesService: LeaguesServiceable = LeaguesService()) { // NewsServiceMock()
-        self.leaguesService = leaguesService
+    var hasMoreContent: Bool {
+        responseModel?.pagination.hasMore ?? false
+    }
+    
+    init(service: LeaguesServiceable = LeaguesService()) {
+        self.service = service
     }
 
     @MainActor
-    func fetchAllLeagues(page: Int? = nil) async {
+    func fetchAllData(page: Int? = nil) async {
         guard state != .empty else { return }
-        
-        if currentPage == 1 || allLeagues.isEmpty {
-            self.changeState(.loading)
-        }
-        
+
         do {
-            let result: LeaguesResponseModel = try await leaguesService.getAllLeagues(currentPage: page ?? currentPage)
+            let result: LeaguesResponseModel = try await service.getAllLeagues(currentPage: page ?? currentPage)
+            if currentPage == 1 || data.isEmpty {
+                self.changeState(.loading)
+            }
             
             if page == 1 {
-                allLeagues = result.data
+                data = result.data
             } else {
-                updateAllLeaguesData(with: result)
+                updateData(with: result)
             }
-            leaguesResponseModel = result
+            responseModel = result
             changeState(.finished)
         } catch {
             changeState(.error(error: error.localizedDescription))
@@ -45,12 +47,12 @@ final class LeaguesViewModel: BaseViewModel<ViewState> {
     }
     
     func loadMoreContent() async {
-        guard leaguesResponseModel?.pagination.nextPage != nil else { return }
-        await fetchAllLeagues()
+        guard responseModel?.pagination.nextPage != nil, hasMoreContent else { return }
+        await fetchAllData()
     }
     
     func refresh() async {
-        await fetchAllLeagues(page: 1)
+        await fetchAllData(page: 1)
     }
     
     @MainActor 
@@ -58,7 +60,7 @@ final class LeaguesViewModel: BaseViewModel<ViewState> {
         changeState(.empty)
     }
     
-    private func updateAllLeaguesData(with result: LeaguesResponseModel) {
-        allLeagues += result.data
+    private func updateData(with result: LeaguesResponseModel) {
+        data += result.data
     }
 }

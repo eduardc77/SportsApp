@@ -2,49 +2,47 @@
 import Foundation
 
 public enum Spacing: CGFloat {
-    /// value = 2
-    case xxxxTiny  = 2
-    /// value = 3
-    case xxxTiny   = 3
-    /// value = 4
-    case xxTiny    = 4
-    /// value = 5
-    case xTiny     = 5
-    /// value = 6
-    case tiny      = 6
     
-    /// value = 7
-    case xxxxSmall = 7
-    /// value = 8
-    case xxxSmall  = 8
-    /// value = 9
-    case xxSmall   = 9
-    /// value = 10
-    case xSmall    = 10
-    /// value = 11
-    case small     = 11
-    
-    /// value = 12
-    case medium    = 12
-    /// value = 14
-    case medium2   = 14
-    /// value = 16
-    case medium3   = 16
-    /// value = 18
-    case medium4   = 18
-    /// value = 20
-    case medium5   = 20
-    
-    /// value = 22
-    case large     = 22
-    /// value = 24
-    case xLarge    = 24
-    /// value = 26
-    case xxLarge   = 26
-    /// value = 30
-    case xxxLarge  = 30
-    /// value = 35
-    case xxxxLarge = 36
+    /// 2 points
+    case p2  = 2
+    /// 3 points
+    case p3  = 3
+    /// 4 points
+    case p4  = 4
+    /// 5 points
+    case p5  = 5
+    /// 6 points
+    case p6  = 6
+    /// 7 points
+    case p7  = 7
+    /// 8 points
+    case p8  = 8
+    /// 9 points
+    case p9  = 9
+    /// 10 points
+    case p10 = 10
+    /// 11 points
+    case p11 = 11
+    /// 12 points
+    case p12 = 12
+    /// 14 points
+    case p14 = 14
+    /// 16 points
+    case p16 = 16
+    /// 18 points
+    case p18 = 18
+    /// 20 points
+    case p20 = 20
+    /// 22 points
+    case p22 = 22
+    /// 24 points
+    case p24 = 24
+    /// 26 points
+    case p26 = 26
+    /// 30 points
+    case p30 = 30
+    /// 36 points
+    case p35 = 36
     
     //...
     

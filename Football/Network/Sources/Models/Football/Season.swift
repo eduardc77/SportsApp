@@ -11,11 +11,12 @@ public struct Season: Decodable, Hashable {
     public let standingMethod: String?
     public let startingAt: String?
     public let endingAt: String?
+    public let stages: [Stage]?
 }
 
 public struct SeasonsResponseModel: Decodable {
     public let data: [Season]
-    public let pagination: Pagination
+    public let pagination: Pagination?
     public let subscription: [Subscription]?
     public let rateLimit: RateLimit
     public let timezone: String

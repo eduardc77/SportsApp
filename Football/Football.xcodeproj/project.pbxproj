@@ -76,6 +76,13 @@
 		DD5EE1222C601BD700FB03D9 /* SeasonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5EE11D2C601BD700FB03D9 /* SeasonsView.swift */; };
 		DD5EE1232C601BD700FB03D9 /* SeasonGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5EE11E2C601BD700FB03D9 /* SeasonGridItem.swift */; };
 		DD5EE1242C601BD700FB03D9 /* SeasonsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5EE1202C601BD700FB03D9 /* SeasonsCoordinator.swift */; };
+		DDEFA1AD2C609005008661B3 /* FixtureGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEFA1A72C609005008661B3 /* FixtureGridItem.swift */; };
+		DDEFA1AE2C609005008661B3 /* FixturesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEFA1A92C609005008661B3 /* FixturesCoordinator.swift */; };
+		DDEFA1AF2C609005008661B3 /* FixturesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEFA1AA2C609005008661B3 /* FixturesView.swift */; };
+		DDEFA1B02C609005008661B3 /* FixturesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEFA1AB2C609005008661B3 /* FixturesViewModel.swift */; };
+		DDEFA1B62C60A784008661B3 /* RoundGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEFA1B12C60A784008661B3 /* RoundGridItem.swift */; };
+		DDEFA1B72C60A784008661B3 /* RoundsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEFA1B32C60A784008661B3 /* RoundsView.swift */; };
+		DDEFA1B82C60A784008661B3 /* RoundsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEFA1B42C60A784008661B3 /* RoundsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,6 +176,13 @@
 		DD5EE11D2C601BD700FB03D9 /* SeasonsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeasonsView.swift; sourceTree = "<group>"; };
 		DD5EE11E2C601BD700FB03D9 /* SeasonGridItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeasonGridItem.swift; sourceTree = "<group>"; };
 		DD5EE1202C601BD700FB03D9 /* SeasonsCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeasonsCoordinator.swift; sourceTree = "<group>"; };
+		DDEFA1A72C609005008661B3 /* FixtureGridItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FixtureGridItem.swift; sourceTree = "<group>"; };
+		DDEFA1A92C609005008661B3 /* FixturesCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FixturesCoordinator.swift; sourceTree = "<group>"; };
+		DDEFA1AA2C609005008661B3 /* FixturesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FixturesView.swift; sourceTree = "<group>"; };
+		DDEFA1AB2C609005008661B3 /* FixturesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FixturesViewModel.swift; sourceTree = "<group>"; };
+		DDEFA1B12C60A784008661B3 /* RoundGridItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundGridItem.swift; sourceTree = "<group>"; };
+		DDEFA1B32C60A784008661B3 /* RoundsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundsView.swift; sourceTree = "<group>"; };
+		DDEFA1B42C60A784008661B3 /* RoundsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,6 +279,8 @@
 				88BDD4412C5982DA009B9C34 /* Leagues */,
 				DD5EE11B2C601BBE00FB03D9 /* Seasons */,
 				DD5EE1112C6003EF00FB03D9 /* Stages */,
+				DDEFA1B52C60A784008661B3 /* Rounds */,
+				DDEFA1AC2C609005008661B3 /* Fixtures */,
 				88BDD44D2C5982DF009B9C34 /* Teams */,
 				88542BDD2C5AF06C00A9C319 /* Squads */,
 				8840DDFD2C5AD5E900A6893C /* Players */,
@@ -521,10 +537,10 @@
 		DD5EE1112C6003EF00FB03D9 /* Stages */ = {
 			isa = PBXGroup;
 			children = (
+				DD5EE1132C6004E300FB03D9 /* Subviews */,
 				DD5EE1192C60135000FB03D9 /* StagesCoordinator.swift */,
 				DD5EE1142C6004E300FB03D9 /* StagesView.swift */,
 				DD5EE1152C6004E300FB03D9 /* StagesViewModel.swift */,
-				DD5EE1132C6004E300FB03D9 /* Subviews */,
 			);
 			path = Stages;
 			sourceTree = "<group>";
@@ -540,10 +556,10 @@
 		DD5EE11B2C601BBE00FB03D9 /* Seasons */ = {
 			isa = PBXGroup;
 			children = (
+				DD5EE11F2C601BD700FB03D9 /* Subviews */,
 				DD5EE1202C601BD700FB03D9 /* SeasonsCoordinator.swift */,
 				DD5EE11D2C601BD700FB03D9 /* SeasonsView.swift */,
 				DD5EE11C2C601BD700FB03D9 /* SeasonsViewModel.swift */,
-				DD5EE11F2C601BD700FB03D9 /* Subviews */,
 			);
 			path = Seasons;
 			sourceTree = "<group>";
@@ -554,6 +570,43 @@
 				DD5EE11E2C601BD700FB03D9 /* SeasonGridItem.swift */,
 			);
 			path = Subviews;
+			sourceTree = "<group>";
+		};
+		DDEFA1A82C609005008661B3 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				DDEFA1A72C609005008661B3 /* FixtureGridItem.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		DDEFA1AC2C609005008661B3 /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				DDEFA1A82C609005008661B3 /* Subviews */,
+				DDEFA1A92C609005008661B3 /* FixturesCoordinator.swift */,
+				DDEFA1AA2C609005008661B3 /* FixturesView.swift */,
+				DDEFA1AB2C609005008661B3 /* FixturesViewModel.swift */,
+			);
+			path = Fixtures;
+			sourceTree = "<group>";
+		};
+		DDEFA1B22C60A784008661B3 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				DDEFA1B12C60A784008661B3 /* RoundGridItem.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		DDEFA1B52C60A784008661B3 /* Rounds */ = {
+			isa = PBXGroup;
+			children = (
+				DDEFA1B22C60A784008661B3 /* Subviews */,
+				DDEFA1B32C60A784008661B3 /* RoundsView.swift */,
+				DDEFA1B42C60A784008661B3 /* RoundsViewModel.swift */,
+			);
+			path = Rounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -690,6 +743,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88BDD4592C598351009B9C34 /* Router.swift in Sources */,
+				DDEFA1AE2C609005008661B3 /* FixturesCoordinator.swift in Sources */,
 				88BDD4952C5988F3009B9C34 /* Spacing.swift in Sources */,
 				88BDD4742C5984C3009B9C34 /* AboutView.swift in Sources */,
 				88BDD4322C59827D009B9C34 /* ModalScreenRouter.swift in Sources */,
@@ -703,6 +757,8 @@
 				88BDD4452C5982DA009B9C34 /* LeaguesViewModel.swift in Sources */,
 				88BDD48C2C598707009B9C34 /* ShimmerModifier.swift in Sources */,
 				88BDD44F2C5982DF009B9C34 /* TeamsCoordinator.swift in Sources */,
+				DDEFA1B82C60A784008661B3 /* RoundsViewModel.swift in Sources */,
+				DDEFA1B02C609005008661B3 /* FixturesViewModel.swift in Sources */,
 				88BDD43A2C5982C9009B9C34 /* OnboardingView.swift in Sources */,
 				88BDD4512C5982DF009B9C34 /* TeamsViewModel.swift in Sources */,
 				88BDD4442C5982DA009B9C34 /* LeaguesView.swift in Sources */,
@@ -715,14 +771,17 @@
 				88BDD4822C598680009B9C34 /* AsyncButton.swift in Sources */,
 				88542BE42C5AF09000A9C319 /* SquadViewModel.swift in Sources */,
 				88BDD4752C5984C3009B9C34 /* FeedbackView.swift in Sources */,
+				DDEFA1AF2C609005008661B3 /* FixturesView.swift in Sources */,
 				88542BE32C5AF09000A9C319 /* SquadGridItem.swift in Sources */,
 				88BDD4722C5984C3009B9C34 /* PlaceholderText.swift in Sources */,
 				88BDD4432C5982DA009B9C34 /* LeaguesCoordinator.swift in Sources */,
 				88BDD4712C5984C3009B9C34 /* SettingsOption.swift in Sources */,
 				8840DE062C5AD6A300A6893C /* PlayersCoordinator.swift in Sources */,
 				88BDD4602C59835C009B9C34 /* ViewStateProtocol.swift in Sources */,
+				DDEFA1B62C60A784008661B3 /* RoundGridItem.swift in Sources */,
 				88BDD4502C5982DF009B9C34 /* TeamsView.swift in Sources */,
 				88BDD49D2C598A1A009B9C34 /* Color+Hex.swift in Sources */,
+				DDEFA1B72C60A784008661B3 /* RoundsView.swift in Sources */,
 				88BDD49F2C598A1A009B9C34 /* View+Spacing.swift in Sources */,
 				88BDD4A12C598B1E009B9C34 /* SettingsCoordinator.swift in Sources */,
 				88BDD4302C59827D009B9C34 /* AppTabRouter.swift in Sources */,
@@ -744,6 +803,7 @@
 				88BDD4392C5982C9009B9C34 /* OnboardingPageView.swift in Sources */,
 				88BDD4702C5984C3009B9C34 /* AppSettings.swift in Sources */,
 				88BDD48E2C59884D009B9C34 /* ViewRouter.swift in Sources */,
+				DDEFA1AD2C609005008661B3 /* FixtureGridItem.swift in Sources */,
 				88BDD4932C59889F009B9C34 /* Metric.swift in Sources */,
 				88BDD4312C59827D009B9C34 /* AppTabView.swift in Sources */,
 				88BDD4382C5982C9009B9C34 /* OnboardingItemModel.swift in Sources */,

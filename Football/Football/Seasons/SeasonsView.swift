@@ -4,7 +4,6 @@
 //
 
 import SwiftUI
-import Network
 
 struct SeasonsView: View {
     @State private var model: SeasonsViewModel
@@ -13,13 +12,13 @@ struct SeasonsView: View {
     @EnvironmentObject private var tabCoordinator: AppTabRouter
     @EnvironmentObject private var modalRouter: ModalScreenRouter
     
-    init(seasons: [Season] = []) {
-        model = SeasonsViewModel(seasons: seasons)
+    init(model: SeasonsViewModel = SeasonsViewModel()) {
+        self.model = model
     }
     
     var body: some View {
-        baseView()
-            .navigationBar(title: "Stages")
+        baseView
+            .navigationBar(title: "Seasons")
             .refreshable {
                 Task {
                     await model.refresh()
@@ -28,13 +27,13 @@ struct SeasonsView: View {
     }
     
     @ViewBuilder
-    private func baseView() -> some View {
+    private var baseView: some View {
         switch model.state {
         case .empty:
             Label("No Data", systemImage: "newspaper")
         case .finished:
             ScrollView {
-                seasonsGrid
+                gridView
             }
         case .loading:
             ProgressView("Loading")
@@ -46,17 +45,18 @@ struct SeasonsView: View {
             .onFirstAppear {
                 modalRouter.presentAlert(title: "Error", message: error) {
                     Button("OK") {
-                        model.changeStateToEmpty()
+//                        model.changeStateToEmpty()
                     }
                 }
             }
         case .initial:
             ProgressView()
-                .onAppear {
-                    guard model.allSeasons.isEmpty else { return }
-                    Task {
-                        await model.fetchTeamSquad()
+                .task {
+                    guard model.data.isEmpty else {
+                        model.changeState(.finished)
+                        return
                     }
+                    await model.fetchAllData()
                 }
         }
     }
@@ -66,26 +66,24 @@ struct SeasonsView: View {
 
 private extension SeasonsView {
     
-    var seasonsGrid: some View {
+    var gridView: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
-            ForEach(model.allSeasons, id: \.id) { season in
+            ForEach(model.data, id: \.id) { season in
                 SwiftUI.Button {
-                    
+                    router.push(season.id)
                 } label: {
                     SeasonGridItem(item: season)
                 }
             }
             
-            Rectangle()
-                .fill(.clear)
-                .frame(height: 20) // Bottom padding
-                .task {
-                    if model.state != .loading, !model.allSeasons.isEmpty {
+            if model.state != .loading, !model.data.isEmpty, model.hasMoreContent {
+                ProgressView()
+                    .task {
                         await model.loadMoreContent()
                     }
-                }
+            }
         }
-        .padding(10)
+        .padding()
     }
 }
 

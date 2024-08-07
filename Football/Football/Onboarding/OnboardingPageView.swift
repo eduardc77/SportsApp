@@ -43,7 +43,7 @@ struct OnboardingItem: View {
     let title: LocalizedStringKey
     
     var body: some View {
-        HStack(spacing: .medium4) {
+        HStack(spacing: .p18) {
             ZStack {
                 Circle()
                     .foregroundColor(.accentColor)

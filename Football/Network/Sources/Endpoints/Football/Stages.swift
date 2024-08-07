@@ -5,8 +5,8 @@ public extension Football {
     enum Stages: APIRoute {
         case allStages(page: Int)
         case stageByID(_ id: Int)
-        case stageBySeasonID(_ id: Int, page: Int)
-        case stagesSearch(query: String)
+        case stagesBySeasonID(_ id: Int)
+        case stagesSearch(query: String, page: Int)
     }
 }
 
@@ -18,9 +18,9 @@ public extension Football.Stages {
             return "/stages"
         case .stageByID(let id):
             return "/stages/\(id)"
-        case .stageBySeasonID(let seasonID, _):
+        case .stagesBySeasonID(let seasonID):
             return "/stages/seasons/\(seasonID)"
-        case .stagesSearch(let query):
+        case .stagesSearch(let query, _):
             return "/stages/search/\(query)"
         }
     }
@@ -28,19 +28,19 @@ public extension Football.Stages {
     var queryParams: [String: String]? {
         switch self {
         case .allStages(let page):
-            return ["page": "\(page)"]
+            return ["page": "\(page)", "include": "rounds; currentRound; fixtures"]
         case .stageByID:
-            return nil
-        case .stageBySeasonID:
-            return nil
-        case .stagesSearch:
-            return nil
+            return ["include": "rounds; currentRound; fixtures"]
+        case .stagesBySeasonID:
+            return ["include": "rounds; currentRound; fixtures"]
+        case .stagesSearch(_, let page):
+            return ["page": "\(page)", "include": "rounds; currentRound; fixtures"]
         }
     }
     
     var httpMethod: HTTPMethod {
         switch self {
-        case .allStages, .stageByID, .stageBySeasonID, .stagesSearch:
+        case .allStages, .stageByID, .stagesBySeasonID, .stagesSearch:
             return .get
         }
     }

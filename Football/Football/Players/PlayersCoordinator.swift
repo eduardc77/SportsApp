@@ -12,7 +12,7 @@ struct PlayersCoordinator: View {
     
     var body: some View {
         NavigationStack(path: $router.path) {
-            PlayersView()
+            PlayersView(model: PlayersViewModel())
                 .onReceive(tabRouter.$tabReselected) { tabReselected in
                     guard tabReselected, tabRouter.selection == .players, !router.path.isEmpty else { return }
                     router.popToRoot()

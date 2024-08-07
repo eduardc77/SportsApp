@@ -3,7 +3,7 @@
 //  FootballApp
 //
 
-import Foundation
+import Observation
 
 @Observable
 class BaseViewModel<State: ViewStateProtocol> {

@@ -1,26 +1,22 @@
 
-public struct Stage: Decodable, Hashable {
+public struct Round: Decodable, Hashable {
     public let id: Int
     public let sportId: Int?
     public let leagueId: Int?
     public let seasonId: Int?
-    public let typeId: Int?
+    public let stageId: Int?
     public let name: String?
-    public let sortOrder: Int?
     public let finished: Bool?
     public let pending: Bool?
     public let isCurrent: Bool?
     public let startingAt: String?
     public let endingAt: String?
     public let gamesInCurrentWeek: Bool?
-    public let tieBreakerRuleId: Int?
-    public let rounds: [Round]?
-    public let currentRound: Round?
     public let fixtures: [Fixture]?
 }
 
-public struct StagesResponseModel: Decodable {
-    public let data: [Stage]
+public struct RoundsResponseModel: Decodable {
+    public let data: [Round]
     public let pagination: Pagination?
     public let subscription: [Subscription]?
     public let rateLimit: RateLimit

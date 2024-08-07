@@ -7,37 +7,41 @@ import Foundation
 import Network
 
 final class SeasonsViewModel: BaseViewModel<ViewState> {
-    let seasonsService: SeasonsServiceable
+    private let service: SeasonsServiceable
     
-    private(set) var seasonsResponseModel: SeasonsResponseModel?
-    private(set) var allSeasons: [Season]
+    private(set) var responseModel: SeasonsResponseModel?
+    private(set) var data: [Season]
     
     var currentPage: Int {
-        (seasonsResponseModel?.pagination.currentPage ?? 0) + 1
+        (responseModel?.pagination?.currentPage ?? 0) + 1
     }
     
-    init(seasons: [Season], seasonsService: SeasonsServiceable = SeasonsService()) {
-        self.allSeasons = seasons
-        self.seasonsService = seasonsService
+    var hasMoreContent: Bool {
+        responseModel?.pagination?.hasMore ?? false
+    }
+    
+    init(data: [Season] = [], service: SeasonsServiceable = SeasonsService()) {
+        self.data = data
+        self.service = service
     }
     
     @MainActor
-    func fetchTeamSquad(page: Int? = nil) async {
+    func fetchAllData(page: Int? = nil) async {
         guard state != .empty else { return }
         
-        if currentPage == 1 || allSeasons.isEmpty {
-            self.changeState(.loading)
-        }
-        
         do {
-            let result: SeasonsResponseModel = try await seasonsService.getAllSeasons(currentPage: page ?? currentPage)
+            let result: SeasonsResponseModel = try await service.getAllSeasons(currentPage: page ?? currentPage)
+            
+            if currentPage == 1 || data.isEmpty {
+                self.changeState(.loading)
+            }
             if page == 1 {
-                allSeasons = result.data
+                data = result.data
             } else {
-                updateAllSeasonsData(with: result)
+                updateData(with: result)
             }
             
-            seasonsResponseModel = result
+            responseModel = result
             changeState(.finished)
         } catch {
             changeState(.error(error: error.localizedDescription))
@@ -45,12 +49,12 @@ final class SeasonsViewModel: BaseViewModel<ViewState> {
     }
     
     func loadMoreContent() async {
-        guard seasonsResponseModel?.pagination.nextPage != nil else { return }
-        await fetchTeamSquad()
+        guard responseModel?.pagination?.nextPage != nil, hasMoreContent else { return }
+        await fetchAllData()
     }
     
     func refresh() async {
-        await fetchTeamSquad(page: 1)
+        await fetchAllData(page: 1)
     }
     
     @MainActor
@@ -58,7 +62,7 @@ final class SeasonsViewModel: BaseViewModel<ViewState> {
         changeState(.empty)
     }
     
-    private func updateAllSeasonsData(with result: SeasonsResponseModel) {
-        allSeasons += result.data
+    private func updateData(with result: SeasonsResponseModel) {
+        data += result.data
     }
 }
