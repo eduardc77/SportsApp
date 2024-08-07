@@ -9,7 +9,7 @@ struct NavigationBarModifier: ViewModifier {
     var title: String?
     var displayMode: NavigationBarItem.TitleDisplayMode = .inline
     
-    @EnvironmentObject private var modalRouter: ModalScreenRouter
+    @Environment(ModalScreenRouter.self) private var modalRouter
     
     func body(content: Content) -> some View {
         content

@@ -6,9 +6,9 @@
 import SwiftUI
 
 struct SettingsCoordinator: View {
-    @StateObject private var router = ViewRouter()
     @EnvironmentObject private var tabRouter: AppTabRouter
-    @EnvironmentObject private var modalRouter: ModalScreenRouter
+    @State private var router = ViewRouter()
+    @Environment(ModalScreenRouter.self) private var modalRouter
     
     var body: some View {
         NavigationStack(path: $router.path) {
@@ -18,7 +18,7 @@ struct SettingsCoordinator: View {
                     router.popToRoot()
                 }
         }
-        .environmentObject(router)
+        .environment(router)
     }
 }
 

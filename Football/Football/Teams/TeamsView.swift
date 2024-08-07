@@ -10,7 +10,7 @@ struct TeamsView: View {
     
     @Environment(ViewRouter.self) private var router
     @EnvironmentObject private var tabCoordinator: AppTabRouter
-    @EnvironmentObject private var modalRouter: ModalScreenRouter
+    @Environment(ModalScreenRouter.self) private var modalRouter
     
     init(model: TeamsViewModel = TeamsViewModel()) {
         self.model = model

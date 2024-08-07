@@ -7,8 +7,8 @@ import SwiftUI
 
 struct AppTabView: View {
     @StateObject private var tabRouter = AppTabRouter()
-    @StateObject private var modalRouter = ModalScreenRouter()
     @Environment(\.openURL) var openURL
+    @State private var modalRouter = ModalScreenRouter()
     
     var body: some View {
         TabView(selection: $tabRouter.selection) {
@@ -22,7 +22,7 @@ struct AppTabView: View {
         .fullScreenCover(item: $modalRouter.presentedFullScreenCover, content: fullScreenCoverContent)
         .alert($modalRouter.alert)
         .environmentObject(tabRouter)
-        .environmentObject(modalRouter)
+        .environment(modalRouter)
         .onOpenURL { url in
             
         }

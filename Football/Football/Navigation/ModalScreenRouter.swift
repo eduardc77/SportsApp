@@ -13,13 +13,14 @@ public final class AnyIdentifiable: Identifiable {
     }
 }
 
-final class ModalScreenRouter: ObservableObject {
-    @Published var presentedSheet: AnyIdentifiable?
-    @Published var presentedFullScreenCover: AnyIdentifiable?
-    @Published var presentedPopover: Popover = Popover()
+@Observable
+final class ModalScreenRouter {
+    var presentedSheet: AnyIdentifiable?
+    var presentedFullScreenCover: AnyIdentifiable?
+    var presentedPopover: Popover = Popover()
     
-    @Published var alert: Alert?
-    @Published var confirmationDialog: Alert?
+    var alert: Alert?
+    var confirmationDialog: Alert?
     
     init() {}
     

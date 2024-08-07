@@ -8,7 +8,7 @@ import SwiftUI
 struct PlayersCoordinator: View {
     @State private var router = ViewRouter()
     @EnvironmentObject private var tabRouter: AppTabRouter
-    @EnvironmentObject private var modalRouter: ModalScreenRouter
+    @Environment(ModalScreenRouter.self) private var modalRouter
     
     var body: some View {
         NavigationStack(path: $router.path) {
