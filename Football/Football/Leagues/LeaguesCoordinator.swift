@@ -7,7 +7,7 @@ import SwiftUI
 import Network
 
 struct LeaguesCoordinator: View {
-    @StateObject private var router = ViewRouter()
+    @State private var router = ViewRouter()
     @EnvironmentObject private var tabRouter: AppTabRouter
     @EnvironmentObject private var modalRouter: ModalScreenRouter
     
@@ -41,7 +41,7 @@ struct LeaguesCoordinator: View {
                     router.popToRoot()
                 }
         }
-        .environmentObject(router)
+        .environment(router)
     }
 }
 

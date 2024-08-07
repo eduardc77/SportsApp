@@ -8,7 +8,7 @@ import SwiftUI
 struct FixturesView: View {
     @State var model: FixturesViewModel
     
-    @EnvironmentObject private var router: ViewRouter
+    @Environment(ViewRouter.self) private var router
     @EnvironmentObject private var tabCoordinator: AppTabRouter
     @EnvironmentObject private var modalRouter: ModalScreenRouter
     

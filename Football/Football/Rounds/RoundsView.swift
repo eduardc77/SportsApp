@@ -8,7 +8,7 @@ import SwiftUI
 struct RoundsView: View {
     @State var model: RoundsViewModel
     
-    @EnvironmentObject private var router: ViewRouter
+    @Environment(ViewRouter.self) private var router
     @EnvironmentObject private var tabCoordinator: AppTabRouter
     @EnvironmentObject private var modalRouter: ModalScreenRouter
     

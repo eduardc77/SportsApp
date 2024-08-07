@@ -6,7 +6,7 @@
 import SwiftUI
 
 struct PlayersCoordinator: View {
-    @StateObject private var router = ViewRouter()
+    @State private var router = ViewRouter()
     @EnvironmentObject private var tabRouter: AppTabRouter
     @EnvironmentObject private var modalRouter: ModalScreenRouter
     
@@ -18,7 +18,7 @@ struct PlayersCoordinator: View {
                     router.popToRoot()
                 }
         }
-        .environmentObject(router)
+        .environment(router)
     }
 }
 

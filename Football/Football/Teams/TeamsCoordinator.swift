@@ -7,7 +7,7 @@ import SwiftUI
 import Network
 
 struct TeamsCoordinator: View {
-    @StateObject private var router = ViewRouter()
+    @State private var router = ViewRouter()
     @EnvironmentObject private var tabRouter: AppTabRouter
     @EnvironmentObject private var modalRouter: ModalScreenRouter
     
@@ -29,7 +29,7 @@ struct TeamsCoordinator: View {
                     router.popToRoot()
                 }
         }
-        .environmentObject(router)
+        .environment(router)
     }
 }
 
