@@ -37,5 +37,7 @@ public struct CTAButton: View {
 }
 
 #Preview {
-    CTAButton(title: "Start", action: {}).preferredColorScheme(.dark).previewLayout(.sizeThatFits)
+    CTAButton(title: "Start", action: {})
+        .preferredColorScheme(.dark)
+        .padding()
 }
