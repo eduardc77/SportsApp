@@ -1,6 +1,6 @@
 
 /**
- This namespace contains a Footballl-specific set of environments,
+ This namespace contains a Football-specific set of environments,
  routes and data types.
  
  You can setup a dev account at `https://www.sportmonks.com`

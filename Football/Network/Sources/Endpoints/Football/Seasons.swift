@@ -1,5 +1,5 @@
 
-public extension Football {
+extension Football {
     
     /// This enum defines the currently supported API routes.
     enum Seasons: APIRoute {
@@ -10,7 +10,7 @@ public extension Football {
     }
 }
 
-public extension Football.Seasons {
+extension Football.Seasons {
     
     var path: String {
         switch self {

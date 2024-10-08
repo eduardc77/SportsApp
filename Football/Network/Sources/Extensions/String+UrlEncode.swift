@@ -2,7 +2,7 @@
 extension String {
     
     /**
-     Encode the string to work with `x-www-form-urlencoded`.
+     Encode the string to work with `x-www-form-url-encoded`.
      
      This will first call `urlEncoded()`, then replace every
      `+` with `%2B`.

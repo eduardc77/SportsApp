@@ -1,5 +1,5 @@
 
-public extension Football {
+extension Football {
     
     /// This enum defines the currently supported API routes.
     enum Leagues: APIRoute {
@@ -10,10 +10,9 @@ public extension Football {
         case leagueByCountryID(_ countryID: Int)
         case leaguesSearch(query: String)
     }
-    
 }
 
-public extension Football.Leagues {
+extension Football.Leagues {
     
     var path: String {
         switch self {

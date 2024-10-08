@@ -5,7 +5,7 @@ import Foundation
  This enum defines api-specific errors that can occur when a
  client communicates with an external API.
  */
-public enum APIError: Error, Equatable, LocalizedError {
+enum APIError: Error, Equatable, LocalizedError {
 
     /// This error should be thrown when a `URLRequest` will
     /// fail to be created due to invalid `URLComponents`.
@@ -21,13 +21,13 @@ public enum APIError: Error, Equatable, LocalizedError {
     case unknownError(code: Int, description: String)
 }
 
-public extension APIError {
+extension APIError {
     
     var isInvalidResponseStatusCode: Bool { self == .invalidHTTPResponse }
     var isDecodingDataError: Bool { self == .decodingDataError }
 }
 
-public extension APIError {
+extension APIError {
     
     var errorDescription: String? {
         switch self {
