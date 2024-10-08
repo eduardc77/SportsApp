@@ -1,6 +1,6 @@
 
-public extension Football {
-    
+extension Football {
+
     /// This enum defines the currently supported API routes.
     enum Players: APIRoute {
         case allPlayers(page: Int)
@@ -11,7 +11,7 @@ public extension Football {
     }
 }
 
-public extension Football.Players {
+extension Football.Players {
     
     var path: String {
         switch self {

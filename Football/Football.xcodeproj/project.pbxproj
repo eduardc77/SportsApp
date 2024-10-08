@@ -265,12 +265,12 @@
 		88BDD3EF2C597F58009B9C34 = {
 			isa = PBXGroup;
 			children = (
-				88BDD4272C598026009B9C34 /* Network */,
 				88BDD3FA2C597F58009B9C34 /* Football */,
 				88BDD40C2C597F5A009B9C34 /* FootballTests */,
 				88BDD4162C597F5A009B9C34 /* FootballUITests */,
 				88BDD3F92C597F58009B9C34 /* Products */,
 				88BDD4612C598392009B9C34 /* Frameworks */,
+				88BDD4272C598026009B9C34 /* Network */,
 			);
 			sourceTree = "<group>";
 		};

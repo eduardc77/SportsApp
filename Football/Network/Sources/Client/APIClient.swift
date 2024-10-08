@@ -2,8 +2,7 @@
 import Foundation
 import Combine
 
-
-public protocol APIClient {
+protocol APIClient {
     
     func asyncFetchRequest<T: Decodable>(_ route: APIRoute, in environment: APIEnvironment, session: URLSession, decoder: JSONDecoder) async throws -> T
     func combineFetchRequest<T: Decodable>(_ route: APIRoute, in environment: APIEnvironment, session: URLSession, decoder: JSONDecoder) -> AnyPublisher<T, Error>
@@ -12,7 +11,7 @@ public protocol APIClient {
     func asyncDownload(_ route: APIRoute, in environment: APIEnvironment, session: URLSession) async throws -> URL
 }
 
-public extension APIClient {
+extension APIClient {
     
     func asyncFetchRequest<T: Decodable>(_ route: APIRoute, in environment: APIEnvironment, session: URLSession = .shared, decoder: JSONDecoder = JSONDecoder()) async throws -> T {
         let (data, response) = try await session.data(for: route.urlRequest(for: environment))

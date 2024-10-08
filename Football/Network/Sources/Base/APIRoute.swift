@@ -136,13 +136,13 @@ enum ContentType: String {
     case form = "application/x-www-form-urlencoded"
 }
 /**
- Enum for Authe Types
+ Enum for Auth Types
  */
 enum AuthType: String {
     case bearer = "Bearer"
 }
 /**
- Enum for HTTP Heeader Fields
+ Enum for HTTP Header Fields
  */
 enum HTTPHeaderField: String {
     case contentType = "Content-Type"
