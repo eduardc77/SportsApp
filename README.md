@@ -22,6 +22,5 @@ The app is still work in progress.
 
 ## Built with:
 - SwiftUI
-- Combine
 - Asynchronous (async/await) Functions
 
