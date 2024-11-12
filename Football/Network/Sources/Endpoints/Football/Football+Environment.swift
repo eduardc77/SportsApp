@@ -29,14 +29,6 @@ public extension Football.Environment {
     }
     
     var queryParams: [String : String]? {
-        // switch self {
-        // case .production: return nil
-        // case .preproduction: return nil
-        // case .develop(let apiToken):
-        //     return [
-        //         "api_token": "\(apiToken)"
-        //     ]
-        // }
         return nil
     }
     
