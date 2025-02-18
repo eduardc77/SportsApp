@@ -1,7 +1,7 @@
 
 <!-- HEADER -->
 <img src="./Preview/AppIcon.png" width="60" align="right"/>
-<h1> Football App </h1>
+<h1> Sports App </h1>
 
 
 [![Swift](https://img.shields.io/badge/Swift-5.0-orange.svg?longCache=true&style=flat&logo=swift)][Swift]
